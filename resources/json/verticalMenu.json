@@ -1,0 +1,290 @@
+{
+    "menu": [
+        {
+            "url": "",
+            "navheader": "Main",
+            "icon": "",
+            "policy": "restaurant"
+        },
+        {
+            "url": "dashboard",
+            "name": "Dashboard",
+            "icon": "zmdi zmdi-home",
+            "policy": "waiter",
+            "submenu": [
+                {
+                    "url": "waiter/dashboard",
+                    "uri": "waiter.dashboard",
+                    "name": "Make Order ",
+                    "icon": "",
+                    "policy": "waiter"
+                },
+                {
+                    "url": "dashboard",
+                    "uri": "customer.orders",
+                    "name": "My Orders",
+                    "icon": "",
+                    "policy": "waiter"
+                },
+                {
+                    "url": "customer/completed/orders",
+                    "uri": "customer.completed.orders",
+                    "name": "Orders History",
+                    "icon": "",
+                    "policy": "waiter"
+                }
+                
+               
+               
+            ]
+        },
+        {
+            "url": "dashboard",
+            "name": "Dashboard",
+            "icon": "zmdi zmdi-home",
+            "policy": "customer",
+            "submenu": [
+                {
+                    "url": "Restaurants  ",
+                    "uri": "pages.restaurants",
+                    "name": "View Restaurants ",
+                    "icon": "",
+                    "policy": "customer"
+                },
+                {
+                    "url": "pages/restaurant",
+                    "uri": "pages.restaurants",
+                    "name": "Make Order ",
+                    "icon": "",
+                    "policy": "customer"
+                },
+                {
+                    "url": "dashboard",
+                    "uri": "customer.orders",
+                    "name": "My Orders",
+                    "icon": "",
+                    "policy": "customer"
+                },
+                {
+                    "url": "customer/completed/orders",
+                    "uri": "customer.completed.orders",
+                    "name": "Orders History",
+                    "icon": "",
+                    "policy": "customer"
+                }
+                
+               
+               
+            ]
+        },
+        {
+            "url": "dashboard",
+            "name": "Dashboard",
+            "icon": "zmdi zmdi-home",
+            "policy": "admin",
+            "submenu": [
+               
+                {
+                    "url": "dashboard",
+                    "uri": "admin.dashboard",
+                    "name": "Admin Stats",
+                    "icon": "",
+                    "policy": "admin"
+                },
+                {
+                    "url": "manage users ",
+                    "uri": "admin.manage.users",
+                    "name": "Manage Restaurant ",
+                    "icon": "",
+                    "policy": "admin"
+                }
+               
+            ]
+        },
+        {
+            "url": "dashboard",
+            "name": "Dashboard",
+            "icon": "zmdi zmdi-home",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "dashboard",
+                    "uri": "dashboard",
+                    "name": "Analytics",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+                
+               
+            ]
+        },
+        {
+            "url": "orders",
+            "name": "Orders",
+            "icon": "zmdi zmdi-shopping-cart",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "orders",
+                    "uri": "orders",
+                    "name": "Pending",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "orders/completed",
+                    "uri": "orders.completed",
+                    "name": "Completed",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "navheader": "CATEGORIES & MENUS MANAGER",
+            "icon": "",
+            "policy": "restaurant"
+        },
+        {
+            "url": "gallery",
+            "name": "Menus",
+            "icon": "zmdi zmdi-assignment",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "gallery",
+                    "uri": "gallery",
+                    "name": "Gallery",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "menu/all",
+                    "uri": "menu.list",
+                    "name": "Menus",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "ingredients/all",
+                    "uri": "ingredients.list",
+                    "name": "Ingredients",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "Categories",
+            "icon": "zmdi zmdi-grid",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "View All",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "navheader": "RESTAURANTS MANAGEMENT",
+            "icon": "",
+            "policy": "restaurant"
+        },
+        {
+            "url": "",
+            "name": "Profile",
+            "icon": "zmdi zmdi-delicious",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "profile",
+                    "uri": "profile",
+                    "name": "View",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "Restaurant Configs",
+            "icon": "zmdi zmdi-wrench",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "restaurant.users",
+                    "uri": "restaurant.users",
+                    "name": "Add Waiter",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+
+                {
+                    "url": "restaurant.tables",
+                    "uri": "restaurant.tables",
+                    "name": "Table Numbers",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+               
+            ]
+            
+        },
+        {
+            "url": "",
+            "name": "Invoices",
+            "icon": "zmdi zmdi-lock",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "View all",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "recent",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "System",
+            "icon": "zmdi zmdi-lock",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "Settings",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "Configuration",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "generate/qr",
+                    "uri": "qr.generate.view",
+                    "name": "QR Code",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        }
+     
+   
+
+
+    ]
+}
