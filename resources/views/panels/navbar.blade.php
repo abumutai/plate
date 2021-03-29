@@ -9,7 +9,7 @@
 </div><!-- End Preload -->
 
 <!-- Header ================================================== -->
-<header>
+<header style="background-color: #fcdf03;">
     <div class="container-fluid">
         <div class="row">
             <div class="col--md-4 col-sm-4 col-xs-4">
@@ -36,25 +36,18 @@
                         @else
 
                         @if(Auth::user()->role->id == 1) <li>
-                            <li>
-                                <a href="{{route('admin.dashboard')}}" class="show-submenu">Admin Dashboard</a>
-                            </li>
-                         
+                            <a href="{{route('admin.dashboard')}}" class="show-submenu">Admin Dashboard</a>
                         </li>
                         @elseif(Auth::user()->role->id == 2) <li>
                         <li>
                             <a href="{{route('orders')}}" class="show-submenu">Orders</a>
+
                         </li>
                         <li>
                             <a href="{{route('menu.list')}}" class="show-submenu">Menu</a>
+
                         </li>
-                        <li>
-                            <a href="{{route('kitchen.home')}}" class="show-submenu">Kitchen Dashboard</a>
-                        </li>
-                        @elseif(Auth::user()->role->id == 5) <li>
-                            <li>
-                                <a href="{{route('kitchen.home')}}" class="show-submenu">Kitchen Dashboard</a>
-                            </li>
+
                         @else
 
                         <li>

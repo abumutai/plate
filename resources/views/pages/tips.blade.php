@@ -19,7 +19,7 @@
                  data-top-bottom="background-position: 50% -100px;"
                  data-anchor-target="#blog_list-parallax"
             >
-                <div class="bg-transparent">
+                <div class="bg-transparent" style="background-image: url('images/backgrounds/agency-content-img02.jpg')">
                     <div class="banner-content">
                         <div class="container" >
                             <div class="slider-content  "> <i class="icon-home-ico"></i>

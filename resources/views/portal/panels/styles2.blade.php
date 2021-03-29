@@ -12,7 +12,7 @@
 <style>
     .slimScrollBar {
         width: 5px !important;
-        background: #6a1b99 !important;
+        background: black !important;
         height: 128px !important;
 
     }

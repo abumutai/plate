@@ -23,7 +23,7 @@
 
     }
     nav ul li a{
-        font-size: 16px!important;
+        font-size: 18px!important;
     }
 </style>
 

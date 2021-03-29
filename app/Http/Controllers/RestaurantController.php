@@ -6,6 +6,7 @@ use App\RestaurantProfile;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable;
 
 
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
+    use Notifiable;
     public function qrCodeResponse(RestaurantProfile $restaurant)
     {
         return redirect()->route('pages.restaurants.menu', $restaurant);

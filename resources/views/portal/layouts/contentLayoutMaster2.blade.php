@@ -10,9 +10,13 @@
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') :: Sahani</title>
-    <link rel="icon" href="{{asset('/images/favicon.ico')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
     {{-- Include core + vendor Styles --}}
     @include('portal.panels.styles2')
+
+
+
+
 </head>
 
 @extends('portal.layouts.verticalLayoutMaster2' )

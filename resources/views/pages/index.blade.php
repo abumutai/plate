@@ -8,16 +8,95 @@
 @section('page-style')
     <!-- Page css files -->
     <style>
-        .icon-bg {/*
-            background: #00bfff;
-            width: 60px;
-            height: 60px;
+        .set {
+            /*background-image:  url('images/backgrounds/agency-content-img02.jpg'); position: top center no-repeat;*/
+            animation: animateBg forwards 2s ease-in;
+            background-size: cover;
+            background-color: #ffff3d;
+            background-image: url('images/button/p1.jpeg');
+            width: 100%; height: 360px; 
+            position: relative;
+        }
+        @keyframes animateBg{
+            from { background-size: 100px; }
+            to { background-size: 100%; }
+        }
+        /* Image Zooming Effect */
+
+        #videoBG{
+            position: fixed;
+            z-index: -1;
+            
+        }
+        @media (min-aspect-ratio: 16/9) {
+            #videoBG{
+                width: 100%;
+                background-size: cover;
+                
+            }
+        }
+        @media (max-aspect-ratio: 16/9) {
+            #videoBG{
+                width: auto;
+                height: 100%;
+            }
+        }
+
+        #video1 { margin: auto; display: block;}
+        #videoMessage { position: absolute; top: 0; left: 0;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center; 
+            width: 100%;
+            height: 100%;
+        }
+        .zoom {
+            padding: 50px;
+            transition: transform .2s; /* Animation */
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .zoom:hover {
+            transform: scale(2.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+
+        .flip-box {
+            background-color: transparent;
+            border: 1px solid #f1f1f1;
+            perspective: 500px;
+        }
+
+        .flip-box-inner {
+            position: relative;
             text-align: center;
-            line-height: 57px;
-            border-radius: 50%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box:hover .flip-box-inner {
+            transform: rotateY(180deg);
+            transition-duration: 0.100s;
+        }
+
+        .flip-box-front, .flip-box-back {
+            position: relative;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-box-front {
+            
             color: #fff;
-            font-size: 32px;
-            */
+        }
+
+        .flip-box-back:hover {
+            transform: rotateY(180deg);
+            background-repeat:no-repeat;
+            background-size: cover;
+            transform: scale(2.0);
         }
 
         .media .media-body {
@@ -32,22 +111,43 @@
             text-shadow: 1px 1px 0 #ddd
         }
 
+        #set {
+
+            background-image:  url('images/backgrounds/agency-content-img02.jpg');
+            background-repeat: no-repeat, repeat;
+            background-size: cover; 
+        }
+
+        /* This is for transformational transitions */
+
+
+
     </style>
 @endsection
 @section('content')
     <!-- SubHeader =============================================== -->
-    <section class="header-video" style="background-color: #6A1B9A;">
+    <section class="header-video set">
+
         
         <div id="hero_video">
-            <div id="sub_content">
+           <!-- <video id="video1"  poster="videos/frame.jpg" autoplay muted loop>
+               <source src="videos/animation.mp4" type="video/mp4">
+            </video> -->
+
+
+            
+           <!-- <div id="sub_content">
+                <br><br>
                 <h1 class="text">Search  food and Drinks </h1>
-                <!-- <p style="font-weight: 200!important;margin-top: 2em">
+                 <p style="font-weight: 200!important;margin-top: 2em">
                  or browse restaurants
                 </p> -->
+                <br><br><br><br><br><br><br><br><br><br><br>
                 <form method="get" action="{{route('item.search')}}">
                     <div id="custom-search-input">
+                        <h2 class="text" style="color: #fff;">Search Foods and Drinks</h2>
                         <div class="input-group">
-                            <input type="text" autocomplete="off" style="background-color: white" class="w3-text-shadow search-query" value="" name="search_item" placeholder="ugali nyama">
+                            <input type="text" autocomplete="off" autofocus style="background-color: white" class="w3-text search-query" value="" name="search_item" placeholder="ugali nyama" style="background-color: transparent">
                             <span class="input-group-btn" >
                         <input type="submit" class="btn_search" value="submit" >
                         </span>
@@ -58,17 +158,17 @@
                 <br>
                 <P>or</P>
                    
-
-        <a href="{{route('pages.restaurants')}}" class="button_intro outline">View Restaurants</a>
+                
       </div>
-            </div>
+        
+            </div> 
             <!-- End sub_content -->
          
        
         </div>
         <img src="{{asset('landing/img/landing1.jpg')}}" alt="" class="header-video--media"
              data-provider="Vimeo" data-video-width="1920" data-video-height="960">
-        <div id="count" class="hidden-xs">
+        <div id="count" class="hidden-xs" style="background-color: transparent; font-size: 30px">
             <ul>
                 <li>
                     <a href="{{route('d_tips')}}" class="button_intro outline">Diet Tips</a>
@@ -90,31 +190,47 @@
             </p>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <div class="box_home" id="one">
+            <div class="col-md-3 flip-box">
+                <div class="box_home flip-box-inner" id="one">
                     <span>1</span>
-                    <h3>Search by address</h3>
-                    <p>
-                        Find all restaurants available in your zone.
-                    </p>
+                    <div class="flip-box-front">
+
+                        <h3>Search by address</h3>
+                        <p>
+                            Find all restaurants available in your zone.
+                        </p>
+                    </div>
+                    <div>
+                       <img src="images/button/address.png" alt="this is good stuff" width="200px">                    
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="box_home" id="two">
                     <span>2</span>
-                    <h3>Choose a restaurant</h3>
-                    <p>
-                        We have more than 1000s of menus online.
-                    </p>
+                    <div>
+                        <h3>Choose a restaurant</h3>
+                        <p>
+                            We have more than 1000s of menus online.
+                        </p>
+
+                    </div>
+                    <img src="images/button/resturant.jpg" alt="Resturant Images" width="200px">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="box_home" id="three">
                     <span>3</span>
-                    <h3>Pay by card or cash</h3>
-                    <p>
-                        It's quick, easy and totally secure.
-                    </p>
+                    <div class="flip-box-tront">
+                        <h3>Pay by card or cash</h3>
+                        <p>
+                            It's quick, easy and totally secure.
+                        </p>
+
+                    </div>
+                    <div class="flip-box-back">
+                        <img src="images/button/images.png" width="200px" alt="This is another image">
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -124,6 +240,7 @@
                     <p>
                         You are lazy? Are you backing home?
                     </p>
+                    <img src="images/button/payment-methods.png" alt="Set Your Location Map" width="200px">
                 </div>
             </div>
         </div><!-- End row -->
@@ -134,7 +251,7 @@
         </div>
     </div><!-- End container -->
 
-    <div class="nomargin_top">
+    <div class="nomargin_top" style="background-color: #f5da42; border-radius: 15px; color:#fff">
         <div class="container">
 
             <div class="main_title">
@@ -146,59 +263,38 @@
 
             <div class="row">
                 <div class="col-lg-4 col-md-6 pt-5  my-auto">
-                    <div class="media mb-4">
+                    <div class="media mb-4" style="background-color:rgba(128, 128, 128, 0.5); border-radius: 10px; color: #fff">
                         <div class="media-body text-right">
-                            <!-- <h5 class="mt-0 mb-2">TIME SAVING</h5>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate. </p> -->
+                            <h5 class="mt-0 mb-2">TIME SAVING</h5>
+                            <p>Every software program is built for a purpose. Performance metrics measure if the product fulfils its purpose and if it performs the way it is meant to.
+                                 It also refers to how the application uses resources, its scalability,
+                                  customer satisfaction, and response times. </p>
                         </div>
-                        <div class="icon-bg ml-3">	<i class="icofont icofont-clock-time"></i></div>
+                        <div class="icon-bg ml-3">	<i class="fa fa-clock-time"></i></div>
                     </div>
-                    <div class="media mb-4">
-                        <div class="media-body text-right">
-                            <!-- <h5 class="mt-0 mb-2">IDEAS COMPARABLE</h5>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate. </p> -->
-                        </div>
-                        <div class="icon-bg ml-3">	<i class="icofont icofont-idea"></i></div>
-                    </div>
-                    <div class="media">
-                        <div class="media-body text-right">
-                            <!-- <h5 class="mt-0 mb-2">AMAZING FEATURE</h5>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate. </p> -->
-                        </div>
-                        <div class="icon-bg ml-3">	<i class="fa fa-video-camera" aria-hidden="true"></i></div>
-                    </div>
+                   
+                   
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="extra-pic text-center">
                         <img src="{{asset('images/backgrounds/extra.jpg')}}" alt="img">
                     </div>
-                    <div class="text-center" style="background-color:D78243;">
+                    <div class="text-center" style="background-color:D78243; margin-top: 10px">
                         <a href="https://play.google.com/store/apps/details?id=com.app.sahani&hl=en_US" class="button_intro"><i ></i> Available on Android</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 pt-5  my-auto">
                     <ul class="list-unstyled">
-                        <li class="media mb-4">
-                            <div class="icon-bg mr-3"><i class="icofont icofont-ui-browser"></i></div>
-                            <div class="media-body">
-                                <!-- <h5 class="mt-0 mb-1 text-uppercase">Fast Browser </h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate. </p> -->
-                            </div>
-                        </li>
-                        <li class="media mb-4">
-                            <div class="icon-bg mr-3"><i class="icofont icofont-ui-map"></i></div>
-                            <div class="media-body">
-                                <!-- <h5 class="mt-0 mb-1">Cureent Locations</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate. </p> -->
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="icon-bg mr-3">	<i class="icofont icofont-video-alt"></i></div>
-                            <div class="media-body">
-                                <!-- <h5 class="mt-0 mb-1">HD Videos</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate. </p> -->
-                            </div>
-                        </li>
+                    <div class="media" style="background-color:rgba(128, 128, 128, 0.5); border-radius: 10px; color: #fff">
+                        <div class="media-body text-right">
+                            <h5 class="mt-0 mb-2">AMAZING FEATURE</h5>
+                            <p>An important quality metric is whether the program is practicable and user-friendly.
+                                  We also ensure that the client is happy with the features and performance.</p>
+                        </div>
+                        
+                    </div>
+                        
+                        
                     </ul>
                 </div>
             </div>
@@ -211,9 +307,9 @@
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2 class="nomargin_top" style="background-color: #6A1B9A;">Choose from Most Popular</h2>
+                <h2 class="nomargin_top" style="background-color: #f5ef42;">Choose from Most Popular</h2>
                 <p>
-                    We have partnered  with several known restaurants to cater for your needs
+                    We have partnered  with several well known restaurants to cater for your needs
                 </p>
             </div>
 
@@ -273,7 +369,7 @@
         </div><!-- End container -->
     </div><!-- End white_bg -->
 --}}
-    <div class="high_light" style="background-color: #6A1B9A;">
+    <div class="high_light" style="background-color: gray">
         <div class="container" > 
             <h3>Choose from over {{\App\RestaurantProfile::all()->count()}} Restaurants</h3>
             <p>We have various catalogue to choose from</p>
@@ -281,7 +377,7 @@
         </div><!-- End container -->
     </div><!-- End hight_light -->
 
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('images/backgrounds/office_del.png')}}"
+    <section class="parallax-window" data-parallax="scroll" data-image-src="images/button/map.jfif"
              data-natural-width="1200" data-natural-height="600" style="background-color: rgba(50,50,50,0.58);background-blend-mode: screen!important;">
         <div class="parallax-content">
             <div class="sub_content">

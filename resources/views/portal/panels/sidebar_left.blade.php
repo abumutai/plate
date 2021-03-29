@@ -1,27 +1,28 @@
 <!-- Left Sidebar -->
 
-@php
+<?php
 use App\Helpers\Helper;$configData = Helper::applClasses();
-@endphp
+?>
 
 <aside id="leftsidebar" class="sidebar">
-    <ul style="background-color: #6A1B9A;" class="list">
-        <div   class="user-info">
-        <div class="image"><a type="hidden" alt="User"></a></div>
-        </div>
-    </ul>
-    <div class="tab-content">
+    
+    <div class="tab-content" >
         <div class="tab-pane stretchRight active" id="dashboard">
             <div class="menu">
                 <ul class="list">
                     <li>
                         <div class="user-info">
                            
-                            @if(isset($restaurant))
-                            <div class="image"><a href="{{route('profile')}}"><img src="{{$restaurant->logo ?? asset('/images/restaurants/logo/rest_default.png')}}" alt="User"></a></div>
+                              @if(isset($restaurant))
+                            <div class="image"><a href="{{route('profile')}}"><img src="{{$restaurant->logo ?? asset('images/restaurants/logo/rest_default.png')}}" alt="User"></a></div>
+
                             @else
-                            <div class="image"><a href="{{route('user.profile')}}"><img src="{{$user->avatar ?? asset('/images/logo/SVG/chef2.svg')}}" alt="User"></a></div>
+                            <div class="image"><a href="{{route('user.profile')}}"><img src="{{$user->avatar ?? asset('images/logo/SVG/chef2.svg')}}" alt="User"></a></div>
+
                             @endif
+
+                         
+
                             <div class="detail">
                                 <h4>{{$restaurant->title ?? $user->name ?? '' }}</h4>
                                 <small>{{$restaurant->headline  ??  $user->role->title ?? ''}}</small>
@@ -65,6 +66,25 @@ use App\Helpers\Helper;$configData = Helper::applClasses();
                     @endif
                     @endforeach
                     @endif
+                    
+                    <li>
+                        <div class="progress-container progress-primary m-t-10">
+                            <span class="progress-badge">Traffic this Month</span>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
+                                    <span class="progress-value">67%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress-container progress-info">
+                            <span class="progress-badge">Server Load</span>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" style="width: 86%;">
+                                    <span class="progress-value">86%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li> 
                 </ul>
             </div>
         </div>
@@ -93,6 +113,36 @@ use App\Helpers\Helper;$configData = Helper::applClasses();
                         <small class="text-muted">Phone: </small>
                         <p>{{$restaurant->phone ?? ''}}</p>
                         <hr>
+                        <!-- <ul class="list-unstyled">
+                            <li>
+                                <div>Photoshop</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar l-blue " role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" style="width: 89%"><span class="sr-only">62% Complete</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>Wordpress</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar l-green " role="progressbar" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" style="width: 56%"><span class="sr-only">87% Complete</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>HTML 5</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar l-amber" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%"><span class="sr-only">32% Complete</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>Angular</div>
+                                <div class="progress m-b-20">
+                                    <div class="progress-bar l-blush" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" style="width: 43%"><span class="sr-only">56% Complete</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> -->
                     </li>
                 </ul>
             </div>

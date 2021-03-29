@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
+use App\Notifications\NewOrderReceived;
 use App\RestaurantProfile;
 use App\RestaurantService;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class OrderController extends Controller
 
 
         ]);
-
+       // Order::with('id'=> $order_id)->notify(new NewOrderReceived($order));
 
         $user = auth()->user();
 
@@ -65,6 +66,7 @@ class OrderController extends Controller
         try {
 
             Order::where(['id' => $order_id])->update(['status' => '2']);
+            //Order::where(['id' => $order_id])->notify(new NewOrderReceived());;
 
             return redirect('/portal/orders')->with('success', 'Order is being processed');
         } catch (\Exception $e) {

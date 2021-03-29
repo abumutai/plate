@@ -22,20 +22,20 @@
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                 <div class="inlineblock text-center m-r-15 m-l-15 hidden-md-down">
-                    <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#fff">3,2,6,5,9,8,7,9,5,1,3,5,7,4,6
+                    <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#111">3,2,6,5,9,8,7,9,5,1,3,5,7,4,6
                     </div>
-                    <small class="col-white">Visitors</small>
+                    <small class="col-black">Visitors</small>
                 </div>
                 <div class="inlineblock text-center m-r-15 m-l-15 hidden-md-down">
-                    <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#fff">1,3,5,7,4,6,3,2,6,5,9,8,7,9,5
+                    <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#111">1,3,5,7,4,6,3,2,6,5,9,8,7,9,5
                     </div>
-                    <small class="col-white">Bounce Rate</small>
+                    <small class="col-black">Bounce Rate</small>
                 </div>
                 <button class="btn btn-white btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a href=""><i class="zmdi zmdi-home"></i> Sahani</a>
+                    <li class="breadcrumb-item"><a href="" class="col-black"><i class="zmdi zmdi-home"></i> Sahani</a>
                     </li>
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ul>

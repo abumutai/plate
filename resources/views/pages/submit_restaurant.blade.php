@@ -297,7 +297,7 @@
                     </div><!-- End row  -->
                     <hr style="border-color:#ddd;">
                     <div class="text-center">
-                        <button class="btn_full_outline">Submit</button>
+                        <button class="btn btn-primary" style="width: 400px">Register Resturant</button>
                     </div>
                 </form>
             </div><!-- End col  -->

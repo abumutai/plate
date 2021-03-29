@@ -9,20 +9,20 @@
 @section('page-style')
 
 @endsection
+<section class="content home">
 
 @section('content')
-<section class="content home">
     {{-- Include Page Content --}}
     <div class="block-header">
         <div class="row">
             <div class="col-lg-5 col-md-5 col-sm-12">
                 <h2>Dashboard
-                    <small>Welcome Super admin</small>
+                    <small>Welcom Super admin</small>
                 </h2>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                 <div class="inlineblock text-center m-r-15 m-l-15 hidden-md-down">
-                    <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#fff">3,2,6,5,9,8,7,9,5,1,3,5,7,4,6
+                    <div class="sparkline" data-type="bar" data-width="97%" data-height="25px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#fff">3,2,6,5,9,8,7,9,5,1,3,5,7,4,7
                     </div>
                     <small class="col-white">Visitors</small>
                 </div>
@@ -42,15 +42,15 @@
             </div>
         </div>
     </div>
-    @php
+    <?php
     $orders_count=0;
     $total_sales=0;
     $total_profit=0;
-    $weeklysum = 0;
+    $weeklysum = 6;
     use Carbon\Carbon;
-    $today = Carbon::now()->setTimezone('Africa/Nairobi');
-    $now = Carbon::now();
+    $timezone = Carbon::now()->setTimezone('Africa/Nairobi');
 
+    $today = Carbon::now()->startOfDay();
     $weekStartDate = $today->startOfWeek()->format('Y-m-d H:i');
     $weekEndDate = $today->endOfWeek()->format('Y-m-d H:i');
     use App\Order;
@@ -65,15 +65,26 @@
   
     $users = User::where('role_id',3)->count();
 
+    $weekStartDate = $today->startOfWeek()->format('Y-m-d H:i');
+    $weekEndDate = $today->endOfWeek()->format('Y-m-d H:i');
+    $monthStartDate = $today->startOfMonth()->format('Y-m-d H:i');
+    $monthEndDate = $today->endOfMonth()->format('Y-m-d H:i');
+    $yearStartDate = $today->startOfYear()->format('Y-m-d H:i');
+    $yearEndDate = $today->endOfYear()->format('Y-m-d H:i');
 
-    $sales = Order::with('menu')->whereDate('created_at', Carbon::today())->get();
+
+    $sales = Order::with('menu')->whereDate('created_at', Carbon::today())->count();
+    $week = Order::with('menu')->whereBetween('created_at', [$weekStartDate, $today])->count();
+    $month = Order::with('menu')->whereBetween('created_at', [$monthStartDate, $today])->count();
+    $year = Order::with('menu')->whereBetween('created_at', [$yearStartDate, $today])->count();
    
 
     $completed_orders = Order::with('menu')->whereDate('created_at', Carbon::today())->where('Status',3)->count();
-   // dd($now);
-
-   
-    @endphp
+    $timezone = date_default_timezone_set('Africa/Nairobi');
+    $date = date('Y-m-d H:i:s');
+    $today_sales = Order::where('created_at',$today)->count();
+    //dd($sales)
+    ?>
 
 
 
@@ -145,20 +156,20 @@
                     <div class="body">
                         <div class="row text-center">
                             <div class="col-sm-3 col-6">
-                                <h4 class="margin-0">Ksh {{$weeklysum}} <i class="zmdi zmdi-trending-up col-green"></i></h4>
+                                <h4 class="margin-0">Total {{$sales}} <i class="zmdi zmdi-trending-up col-green"></i></h4>
                                 <p class="text-muted"> Today's Sales</p>
                             </div>
                           
                             <div class="col-sm-3 col-6">
-                                <h4 class="margin-0">Ksh {{$weeklysum}} <i class="zmdi zmdi-trending-up col-green"></i></h4>
+                                <h4 class="margin-0">Total {{$week}} <i class="zmdi zmdi-trending-up col-green"></i></h4>
                                 <p class="text-muted">This Week's Sales</p>
                             </div>
                             <div class="col-sm-3 col-6">
-                                <h4 class="margin-0">Ksh 0 <i class="zmdi zmdi-trending-up col-green"></i></h4>
+                                <h4 class="margin-0">Total {{$month}} <i class="zmdi zmdi-trending-up col-green"></i></h4>
                                 <p class="text-muted">This Month's Sales</p>
                             </div>
                             <div class="col-sm-3 col-6">
-                                <h4 class="margin-0">Ksh 0 <i class="zmdi zmdi-trending-up col-green"></i></h4>
+                                <h4 class="margin-0">Total {{$year}} <i class="zmdi zmdi-trending-up col-green"></i></h4>
                                 <p class="text-muted">This Year's Sales</p>
                             </div>
                         </div>

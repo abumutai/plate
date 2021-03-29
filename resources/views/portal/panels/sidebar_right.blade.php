@@ -1,5 +1,4 @@
 <!-- Right Sidebar -->
-@include('portal.panels.styles2')
 <aside id="rightsidebar" class="right-sidebar">
     <ul class="nav nav-tabs">
         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>

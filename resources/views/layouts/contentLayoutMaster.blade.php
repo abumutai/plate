@@ -17,6 +17,8 @@
     <title>@yield('title') :: Sahani</title>
 
     <!-- Favicons-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
@@ -27,6 +29,40 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('plugins/Snackbar-Notification-Component/css/snackbar.css')}}">
+
+    <!--The following cascading style sheet is explicitly for the forms -->
+    <style>
+        .modal{
+            border-radius: 10px;
+        }
+        .modal-popup h1{
+            font-weight: 500px;
+            text-transform: uppercase;
+            color: green;
+        }
+        .popup-form input[type = "text"], .popup-form input[type = "password"], .popup-form input[type = "email"]{
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            color: #fff;
+            transition-duration: 0.24s;
+        }
+
+        .popup-form button[type = "submit"]{
+            background-color: yellow;
+            color: #111;
+        }
+
+        .popup-form input[type = "text"]:focus, .popup-form input[type = "password"]:focus, .popup-form input[type = "email"]:focus{
+            -ms-transform: scale(1.2); /* IE 9 */
+            -webkit-transform: scale(1.2); /* Safari 3-8 */
+            transform: scale(1.2);
+            border: 2px solid #2ecc71;
+        }
+
+
+        
+
+    </style>
 
 {{-- Include core + vendor Styles --}}
 @include('panels/styles')
@@ -58,24 +94,25 @@
     <!-- Login modal -->
     <div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content modal-popup">
-                <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+            <div class="modal-content modal-popup" style="background-repeat:no-repeat; background-size: cover; background-color: transparent; border-radius:20px">
+                
+                <a href="#" class="close-link" style="color:red"><i class="icon_close_alt2"></i></a>
                 <form action="{{route('login')}}" method="POST" class="popup-form" id="myLogin" name="loginForm">
                     @csrf
-                    <div class="login_icon"><i class="icon_lock_alt"></i></div>
-                    <input type="email" class="form-control form-white" name="email" placeholder="Email address"
-                           required>
+                    <div class="login_icon"><i class="fa fa-user fa-1x"></i></div>
+                    <input type="email" class="form-control form-white" name="email" placeholder="Email address" autocomplete="off"
+                           >
                     <input type="password" class="form-control form-white" name="password" placeholder="Password"
-                           required>
+                           >
                     <div class="text-left">
                         <a href="{{ route('password.request') }}">Forgot Password?</a>
                     </div>
-                    <button type="submit" class="btn btn-submit">Submit</button>
+                    <button type="submit" class="btn btn-submit">Login</button>
                     <div class="text-danger mt-1 alert-validation-msg animate__animated animate__wobble" role="alert"
                          style="opacity: 1;margin-top: 1em!important;display: none" id="loginAlert">
                         <i class="icon_error-oct_alt mr-1 align-middle" style="color: white"></i>
                         <span class=""
-                              style="color: lightgray!important;">Either the username or password is incorrect</span>
+                              style="color: red!important; font-weight:400">Either the username or password is incorrect</span>
                     </div>
                 </form>
             </div>
@@ -85,27 +122,28 @@
     <!-- Register modal -->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content modal-popup">
-                <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+            <div class="modal-content modal-popup" style="background-repeat:no-repeat; background-size: cover; background-color: transparent; border-radius:20px">
+                
+                <a href="#" class="close-link" style="color:red;"><i class="icon_close_alt2"></i></a>
                 <form method="POST" action="{{ route('register') }}" class="popup-form" id="myRegister"
                       name="registerForm">
                     @csrf
                     <input type="hidden" name="role" value="3">
-                    <div class="login_icon"><i class="icon_lock_alt"></i></div>
+                    
                     <input type="text" class="form-control form-white text-capitalize" placeholder="Name" name="name"
-                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                           value="{{ old('name') }}" autocomplete="name" autofocus>
                     <input type="email" class="form-control form-white text-lowercase" placeholder="Email address"
-                           name="email" value="{{ old('email') }}" required autocomplete="email">
+                           name="email" value="{{ old('email') }}" autocomplete="email">
                     <input type="password" class="form-control form-white" placeholder="Password" name="password"
-                           required autocomplete="new-password">
+                           autocomplete="new-password">
                     <input type="password" class="form-control form-white" placeholder="Confirm password" id="password2"
-                           name="password_confirmation" required autocomplete="new-password">
+                           name="password_confirmation" autocomplete="new-password">
                     <button type="submit" class="btn btn-submit">Register</button>
                     <div class="text-danger mt-1 alert-validation-msg animate__animated animate__wobble" role="alert"
                          style="opacity: 1;margin-top: 1em!important;display: none" id="registerAlert">
                         <i class="icon_error-oct_alt mr-1 align-middle" style="color: white"></i>
                         <span class="" id="registerAlertMessage"
-                              style="color: lightgray!important;"></span>
+                              style="color: #ff0000!important; font-weight: 300px"></span>
                     </div>
                 </form>
             </div>

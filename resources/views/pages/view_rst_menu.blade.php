@@ -19,6 +19,53 @@
     ul li {
         padding: .5em 0;
     }
+
+    /* Rotating Menu*/
+    .box{
+        position: relative;
+        margin-left: 700px;
+        width: 200px;
+        height: 100px;
+        transform-style: preserve-3d;
+        animation: animate 60s linear infinite;
+    }
+    @keyframes animate{
+        0%{
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        100%{
+            transform: perspective(1000px) rotateY(360deg);
+        }
+    }
+    .box span{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150%;
+        height: 150%;
+        transform-origin: center;
+        transform-style: preserve-3d;
+        transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    }
+
+    .box span img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .box span a {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: yellow;
+        font-size: 30px;
+    }
+
+    
 </style>
 @endsection
 @section('content')
@@ -87,14 +134,26 @@
             </div>
         </div><!-- End col-md-3 -->
 
+                <!--Menu Development for slide support-->
+                
+                    <div class="box">
+                        <span style="--i:1"><img src="{{asset('landing/menu/b1.jpeg')}}" alt="Breakfasts"><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(3)->title}} </a>></span>
+                        <span style="--i:2"><img src="{{asset('landing/menu/d1.jpg')}}" alt="Desserts"><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(1)->title}} </a></span>
+                        <span style="--i:3">Drinks<img src="{{asset('landing/menu/dr2.jpg')}}" alt=""><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(2)->title}} </a></span>
+                        <span style="--i:4">Lunch<img src="{{asset('landing/menu/l2.jpg')}}" alt=""><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(3)->title}} </a></span>
+                        <span style="--i:5">Breakfast<img src="{{asset('landing/menu/b2.jpg')}}" alt=""><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(4)->title}} </a></span>
+                        <span style="--i:6">Desserts<img src="{{asset('landing/menu/d2.jpg')}}" alt=""><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(5)->title}} </a></span>
+                        <span style="--i:7">Lunch<img src="{{asset('landing/menu/l1.jpg')}}" alt=""><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(6)->title}} </a></span>
+                        <span style="--i:8">Drinks<img src="{{asset('landing/menu/dd.jpg')}}" alt=""><a href="#{{combineText($category->title,'_')}}">{{\App\Category::find(2)->title}} </a></span>
+                    </div>
         <div class="col-md-6">
-            <div class="box_style_2" id="main_menu">
+            <div class="box_style_2" id="main_menu" style="margin-top:150px;">
                 <h2 class="inner">Menu</h2>
                 @php
                 $count=0
                 @endphp
                 @foreach(\App\Category::all() as $category)
-                <h3 id="{{combineText($category->title,'_')}}">{{$category->title}}</h3>
+                <h3 id="{{combineText($category->title,'_')}}" style="color: #f5da42;">{{$category->title}}</h3>
                 <p>{{$category->description}}</p>
                 <table class="table table-striped cart-list">
                     <thead>
@@ -113,7 +172,7 @@
                     <tbody>
                         @foreach($restaurant->menus->where('category_id',$category->id) as $menu)
 
-                        <tr class="">
+                        <tr class="" style="background-color: #f5da42;">
                             <td>
                                 <figure class="thumb_menu_list">
                                     <img src="{{getMenuImage($menu)}}" alt="thumb">
@@ -168,10 +227,20 @@
                 <hr>
                 @endforeach
             </div><!-- End box_style_1 -->
+           
+            
+
+
+
+
+
+
+
+
         </div><!-- End col-md-6 -->
 
         <div class="col-md-3" id="sidebar">
-            <div class="theiaStickySidebar">
+            <div class="theiaStickySidebar" style="margin-top:150px;">
                 <form id="cart_box" action="{{route('cart.complete',$restaurant)}}" method="post">
                     @csrf
                     @php
@@ -341,6 +410,9 @@
 </script>
 <script src="{{asset('landing/js/theia-sticky-sidebar.js')}}"></script>
 <script src="{{asset('plugins/home/holdon/src/js/HoldOn.js')}}"></script>
+
+
+
 <script>
     jQuery('#sidebar').theiaStickySidebar({
         additionalMarginTop: 80
@@ -417,4 +489,6 @@
 
     }
 </script>
+
+<!--End Of Script -->
 @endsection
