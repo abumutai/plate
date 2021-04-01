@@ -63,7 +63,7 @@ class LoginController extends Controller
                 return json_encode(array('status' => true, 'url' => route('admin.dashboard')));
 
             elseif ($user->role->id == 2)
-                return json_encode(array('status' => true, 'url' => route('dashboard')));
+                return json_encode(array('status' => true, 'url' => route('orders')));
 
 
             elseif ($user->role->id == 4)

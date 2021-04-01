@@ -56,7 +56,7 @@
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
+                                   
                                     <th>Order Name</th>
                                     <th data-breakpoints="xs md">Category</th>
                                     <th data-breakpoints="sm xs">Customer</th>
@@ -77,7 +77,7 @@
                                 <tr>
 
 
-                                    <td><img src="{{$order->menu->image ?? asset('images/logo/SVG/food.svg')}}" width="48" alt="Item image"></td>
+                
                                     <td>
                                         <h5>{{$order->menu->title}}</h5>
                                     </td>

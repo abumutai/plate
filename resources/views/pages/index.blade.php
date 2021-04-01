@@ -127,27 +127,13 @@
 @section('content')
     <!-- SubHeader =============================================== -->
     <section class="header-video set">
-
-        
         <div id="hero_video">
-           <!-- <video id="video1"  poster="videos/frame.jpg" autoplay muted loop>
-               <source src="videos/animation.mp4" type="video/mp4">
-            </video> -->
-
-
-            
-           <!-- <div id="sub_content">
-                <br><br>
-                <h1 class="text">Search  food and Drinks </h1>
-                 <p style="font-weight: 200!important;margin-top: 2em">
-                 or browse restaurants
-                </p> -->
                 <br><br><br><br><br><br><br><br><br><br><br>
-                <form method="get" action="{{route('item.search')}}">
+                <form  method="get" action="{{route('item.search')}}" style="position: relative">
                     <div id="custom-search-input">
-                        <h2 class="text" style="color: #fff;">Search Foods and Drinks</h2>
+                        <h2 class="text" style="color:indigo;">Search Foods and Drinks</h2>
                         <div class="input-group">
-                            <input type="text" autocomplete="off" autofocus style="background-color: white" class="w3-text search-query" value="" name="search_item" placeholder="ugali nyama" style="background-color: transparent">
+                            <input type="text" autocomplete="off" autofocus style="background-color: white;color:indigo;" class="w3-text search-query" value="" name="search_item" placeholder="ugali nyama" style="background-color: transparent">
                             <span class="input-group-btn" >
                         <input type="submit" class="btn_search" value="submit" >
                         </span>
@@ -156,9 +142,6 @@
                 </form>
                 <div>
                 <br>
-                <P>or</P>
-                   
-                
       </div>
         
             </div> 
@@ -170,11 +153,11 @@
              data-provider="Vimeo" data-video-width="1920" data-video-height="960">
         <div id="count" class="hidden-xs" style="background-color: transparent; font-size: 30px">
             <ul>
-                <li>
-                    <a href="{{route('d_tips')}}" class="button_intro outline">Diet Tips</a>
+                <li style="color:indigo;" >
+                    <a href="{{route('d_tips')}}" class="button_intro" >Diet Tips</a>
                 </li>
-                <li><a href="{{route('pages.restaurants')}}" class="" style="color: white!important;"> <span class="number">{{\App\RestaurantProfile::all()->count()}}</span>  Restaurants</a></li>
-                <li><span class="number">{{\App\Order::all()->count()}}</span> People served</li>
+                <li><a style="color:indigo;" href="{{route('pages.restaurants')}}" class="" style="color: white!important;"> <span class="number">{{\App\RestaurantProfile::all()->count()}}</span>  Restaurants</a></li>
+                <li style="color:indigo;" ><span class="number">{{\App\Order::all()->count()}}</span> Happy Customers</li>
             </ul>
         </div>
     </section><!-- End Header video -->
@@ -255,7 +238,7 @@
         <div class="container">
 
             <div class="main_title">
-                <h2 class="text">Donwload Sahani App Today</h2>
+                <h2 class="text">Download Sahani App Today</h2>
                 <p class="py-2">
                    Order on the go
                 </p>
@@ -263,10 +246,10 @@
 
             <div class="row">
                 <div class="col-lg-4 col-md-6 pt-5  my-auto">
-                    <div class="media mb-4" style="background-color:rgba(128, 128, 128, 0.5); border-radius: 10px; color: #fff">
-                        <div class="media-body text-right">
-                            <h5 class="mt-0 mb-2">TIME SAVING</h5>
-                            <p>Every software program is built for a purpose. Performance metrics measure if the product fulfils its purpose and if it performs the way it is meant to.
+                    <div class="media mb-4" style="background-color:white;; border-radius: 10px; color:indigo;">
+                        <div class="media-body text-right" >
+                            <h4 class="mt-0 mb-2" style="color: indigo;font-weight:bolder;">TIME SAVING</h4>
+                            <p style="font-size: 120%;font-weight:bolder;">Every software program is built for a purpose. Performance metrics measure if the product fulfils its purpose and if it performs the way it is meant to.
                                  It also refers to how the application uses resources, its scalability,
                                   customer satisfaction, and response times. </p>
                         </div>
@@ -285,10 +268,10 @@
                 </div>
                 <div class="col-lg-4 col-md-6 pt-5  my-auto">
                     <ul class="list-unstyled">
-                    <div class="media" style="background-color:rgba(128, 128, 128, 0.5); border-radius: 10px; color: #fff">
+                    <div class="media" style="background-color:white; border-radius: 10px; color: #fff">
                         <div class="media-body text-right">
-                            <h5 class="mt-0 mb-2">AMAZING FEATURE</h5>
-                            <p>An important quality metric is whether the program is practicable and user-friendly.
+                            <h4 class="mt-0 mb-2" style="color: indigo;font-weight:bolder;">AMAZING FEATURE</h4>
+                            <p style="color: indigo;font-weight:bolder;font-size:120%;">An important quality metric is whether the program is practicable and user-friendly.
                                   We also ensure that the client is happy with the features and performance.</p>
                         </div>
                         
@@ -302,73 +285,7 @@
     </div>
 
 
-{{--
-    <div class="white_bg">
-        <div class="container margin_60">
 
-            <div class="main_title">
-                <h2 class="nomargin_top" style="background-color: #f5ef42;">Choose from Most Popular</h2>
-                <p>
-                    We have partnered  with several well known restaurants to cater for your needs
-                </p>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="detail_page.html" class="strip_list">
-                        <div class="ribbon_1">Popular</div>
-                        <div class="desc">
-                            <div class="thumb_strip">
-                                <img src="{{asset('landing/img/thumb_restaurant.jpg')}}" alt="">
-                            </div>
-                            <div class="rating">
-                                <i class="icon_star voted"></i><i class="icon_star voted"></i><i
-                                    class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                            </div>
-                            <h3>Taco Mexican</h3>
-                            <div class="type">
-                                Mexican / American
-                            </div>
-                            <div class="location">
-                                135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                            </div>
-                            <ul>
-                                <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                                <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                            </ul>
-                        </div><!-- End desc-->
-                    </a><!-- End strip_list-->
-                </div><!-- End col-md-6-->
-                <div class="col-md-6">
-                    <a href="detail_`page.html" class="strip_list">
-                        <div class="ribbon_1">Popular</div>
-                        <div class="desc">
-                            <div class="thumb_strip">
-                                <img src="{{asset('landing/img/thumb_restaurant_4.jpg')}}" alt="">
-                            </div>
-                            <div class="rating">
-                                <i class="icon_star voted"></i><i class="icon_star voted"></i><i
-                                    class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                            </div>
-                            <h3>Sushi Gold</h3>
-                            <div class="type">
-                                Sushi / Japanese
-                            </div>
-                            <div class="location">
-                                135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                            </div>
-                            <ul>
-                                <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                                <li>Delivery<i class="icon_close_alt2 no"></i></li>
-                            </ul>
-                        </div><!-- End desc-->
-                    </a><!-- End strip_list-->=
-                </div>
-            </div><!-- End row -->
-
-        </div><!-- End container -->
-    </div><!-- End white_bg -->
---}}
     <div class="high_light" style="background-color: gray">
         <div class="container" > 
             <h3>Choose from over {{\App\RestaurantProfile::all()->count()}} Restaurants</h3>

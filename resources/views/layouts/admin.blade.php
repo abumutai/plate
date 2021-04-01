@@ -505,7 +505,7 @@
                     <li>
                         <div class="user-info" style="text-align:center;">
                            
-                            <div class="image" style="margin-bottom: -50px;"><a href="{{route('profile')}}"><img src="{{$restaurant->logo ?? asset('/images/restaurants/logo/rest_default.png')}}" alt="User"></a></div>
+                            <div class="image" style="margin-bottom: -50px;"><a href="/"><img src="{{$restaurant->logo ?? asset('/images/restaurants/logo/rest_default.png')}}" alt="User"></a></div>
                             <div class="detail" >
                                 <h4>{{$restaurant->title ?? $user->name ?? '' }}</h4>
                                 <small>{{$restaurant->headline  ??  $user->role->title ?? ''}}</small>

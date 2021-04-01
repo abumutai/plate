@@ -144,7 +144,6 @@ return response($image)->header('Content-type','image/png');
         $restaurant=$user->restaurant_profile;
        
         $tables = Table::where('restaurant_profile_id',$restaurant->id)->get();
-      //  dd($tables->count());
         return view('portal.restaurant_configs',compact('user','tables'));
 
     }

@@ -29,7 +29,7 @@
 @endsection
 @section('content')
 <section class="content ecommerce-page">
-    <div class="block-header" style="background-color: yellow;">
+    <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <h2>Product List

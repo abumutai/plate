@@ -56,7 +56,6 @@
                             <table class="table table-hover m-b-0">
                                 <thead>
                                 <tr>
-                                    <th>Image</th>
                                     <th>Item Title</th>
                                     <th data-breakpoints="sm xs">Restaurant</th>
                                     <th data-breakpoints="xs md">Category</th>
@@ -71,8 +70,6 @@
                                 @foreach($orders as $order)
                                 @if($order->status == 2 or $order->status == 3 or $order->status == 4 )
                                         <tr>
-                                        <td><img src="{{asset($order->menu->image)}}" width="48"
-                                                 alt="Item image"></td>
                                         <td><h5>{{$order->menu->title}}</h5></td>
                                         <td><span class="text-muted">{{$order->restaurant_profile->title}}</span></td>
                                         <td>{{$order->menu->category->title}}</td>

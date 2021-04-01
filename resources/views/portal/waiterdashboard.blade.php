@@ -55,11 +55,10 @@
                         <div class="row clearfix">
                         <div class="card" style="width: 18rem;">
                      
-                                <img class="card-img-top" src="{{asset($user->restaurant_profile->logo)}}" alt="Card image cap">
-                                <div class="card-body">
+                                
                                     <h5 class="card-title">{{$user->restaurant_profile->title}}</h5>
                                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                                    <a href="{{route('pages.restaurants.menu',$user->restaurant_profile)}}" class="btn btn-primary">Make an Order</a>
+                                    <a href="{{route('pages.restaurants.menu',$user->restaurant_profile)}}" class="btn btn-primary" style="background: indigo;color:white;"> Make an Order</a>
                                 </div>
                                 
                             </div>
