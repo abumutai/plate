@@ -187,7 +187,8 @@
                             </td>
                             <td class="options">
                                 <div class="dropdown dropdown-options">
-                                    <a href="" @guest data-toggle="modal" data-target="#login_2" @else class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" @endguest><i class="icon_plus_alt2"></i></a>
+                                    <a href="" @guest data-toggle="modal" data-target="#login_2" @else class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" @endguest><i class="glyphicon glyphicon-plus-sign
+ lg" style="font-size: 50px"></i></a>
                                     <form class="dropdown-menu addCartForm" name="addCartForm" id="addCartForm" method="get" action="{{route('cart.add',$menu)}}">
                                         <h5>Select an option</h5>
                                         <input type="hidden" name="menu_id" value="{{$menu->id}}">

@@ -126,11 +126,11 @@
                                     </div>
                                    
                                 <div class="col-12 mt-4">
-                                    <button type="reset" class="btn btn-danger ">
+                                    <button type="reset" class="btn btn-warning ">
                                         Cancel
                                     </button>
                                     <button type="submit"
-                                            class="btn btn-primary ">Add
+                                            class="btn btn-primary " style="background-color: indigo;">Add
                                     </button>
                                 </div>
                             </div>

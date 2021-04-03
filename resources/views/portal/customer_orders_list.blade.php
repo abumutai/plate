@@ -57,7 +57,6 @@
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
                                     <th>Item Title</th>
                                     <th data-breakpoints="sm xs">Restaurant</th>
                                     <th data-breakpoints="xs md">Category</th>
@@ -73,8 +72,8 @@
                                 @if($order->status == 1 or $order->status == 2)
 
                                 <tr>
-                                    <td><img src="{{asset($order->menu->image)}}" width="48" alt="Item image"></td>
                                     <td>
+                                        {{dd($orders)}}
                                         <h5>{{$order->menu->title}}</h5>
                                     </td>
                                     <td><span class="text-muted">{{$order->restaurant_profile->title}}</span></td>

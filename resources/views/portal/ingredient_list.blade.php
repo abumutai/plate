@@ -188,11 +188,11 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="reset" class="btn btn-danger ">
+                            <button type="reset" class="btn btn-warning ">
                                 Cancel
                             </button>
                             <button type="submit"
-                                    class="btn btn-primary ">Complete
+                                    class="btn btn-primary" style="background-color: indigo">Complete
                             </button>
                         </div>
                     </form>

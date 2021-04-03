@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use ConsoleTVs\Charts\Registrar as Charts;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $charts->register([
             \App\Charts\StockChart::class
         ]);
+        
         Paginator::useBootstrap();
         // Override the email notification for verifying email
         VerifyEmail::toMailUsing(function ($notifiable) {

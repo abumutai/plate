@@ -89,7 +89,7 @@
                 <form action="{{route('order.step3',$restaurant)}}" method="get" class="box_style_2" id="order_process">
                     <h2 class="inner">Your order details</h2>
                 
-                @if($restaurant_service->service->id==3)<!--dine in-->
+                @if($restaurant_service->service->id==3 ||$restaurant_service->service->id==null)<!--dine in-->
                     <div class="py-2">
                         <p style="font-size: 20px">Hey  {{$user->name}}, please select your table</p>
                         <div class="my-2 row">
@@ -122,16 +122,6 @@
                             <input type="text" id="phone" name="phone" value="{{$user->phone??old('phone')}}" class="form-control"
                                    placeholder="Telephone/mobile">
                         </div>
-                        <!-- <div class="form-group">
-                            <label>Address</label>
-                            <input type="address" id="address" name="address" class="form-control"
-                                   placeholder="address">
-                        </div> -->
-                        <!-- <div class="form-group">
-                            <label>Your Estate</label>
-                            <input type="text" id="estate" name="estate" class="form-control"
-                                   placeholder=" Your full estate name">
-                        </div> -->
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">

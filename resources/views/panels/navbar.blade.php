@@ -27,7 +27,7 @@
 
                     <ul style="margin-top: .8em">
                         <li>
-                            <a href="{{route('landing')}}" class="show-submenu">Home</a>
+                            <a href="{{route('landing')}}"  style="color:indigo;">Home</a>
 
                         </li>
 
@@ -36,28 +36,32 @@
                         @else
 
                         @if(Auth::user()->role->id == 1) <li>
-                            <a href="{{route('admin.dashboard')}}" class="show-submenu">Admin Dashboard</a>
+                            <a href="{{route('admin.dashboard')}}"  style="color:indigo;">Admin Dashboard</a>
                         </li>
                         @elseif(Auth::user()->role->id == 2) <li>
                         <li>
-                            <a href="{{route('orders')}}" class="show-submenu">Orders</a>
+                            <a href="{{route('orders')}}" style="color:indigo;">Orders</a>
 
                         </li>
                         <li>
-                            <a href="{{route('menu.list')}}" class="show-submenu">Menu</a>
+                            <a href="{{route('menu.list')}}" style="color:indigo;">Menu</a>
+
+                        </li>
+                        <li>
+                            <a href="{{route('kitchen.dashboard')}}" style="color:indigo;">Kitchen</a>
 
                         </li>
 
                         @else
 
                         <li>
-                            <a href="{{route('customer.orders')}}" class="show-submenu">Dashboard</a>
+                            <a href="{{route('customer.orders')}}" style="color:indigo;">Dashboard</a>
 
                         </li>
 
                         <li>
 
-                            <a href="{{route('pages.restaurants')}}" class="show-submenu">Restaurants</a>
+                            <a href="{{route('pages.restaurants')}}" style="color:indigo;">Restaurants</a>
                         </li>
 
                         @endif
@@ -74,19 +78,19 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="" data-toggle="modal" data-target="#login_2" id="openDiagLogin">{{ __('Login') }}</a>
+                            <a class="nav-link" href="" style="color:indigo;" data-toggle="modal" data-target="#login_2" id="openDiagLogin">{{ __('Login') }}</a>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="show-submenu">{{ __('Register') }}<i class="icon-down-open-mini"></i></a>
+                            <a href="javascript:void(0);" style="color:indigo;">{{ __('Register') }}<i class="icon-down-open-mini"></i></a>
                             <ul>
-                                <li><a href="" data-toggle="modal" data-target="#register" id="openDiagRegister">Customer</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#register" style="color:indigo;" id="openDiagRegister">Customer</a></li>
 
-                                <li><a href="{{route('pages.restaurants.new')}}">Restaurant</a></li>
+                                <li><a href="{{route('pages.restaurants.new')}}" style="color:indigo;">Restaurant</a></li>
                             </ul>
                         </li>
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color:indigo;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 

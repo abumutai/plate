@@ -103,7 +103,7 @@
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
+                                 
                                     <th>Item Title</th>
                                     <th data-breakpoints="sm xs">Description</th>
                                     <th data-breakpoints="xs md">Category</th>
@@ -116,7 +116,6 @@
                                 @if(null !==($restaurant))
                                 @foreach($restaurant->menus as $menu)
                                 <tr>
-                                    <td><img src="{{$menu->image??asset('images/logo/SVG/food.svg')}}" width="48" alt="Item image"></td>
                                     <td>
                                         <h5>{{$menu->title}}</h5>
                                     </td>
@@ -362,10 +361,10 @@
                     --}}
 
                     <div class="col-12 mt-4">
-                        <button type="reset" class="btn btn-danger ">
+                        <button type="reset" class="btn btn-warning ">
                             Cancel
                         </button>
-                        <button type="submit" class="btn btn-primary ">Proceed post
+                        <button type="submit" style="background-color: indigo;" class="btn btn-primary ">Proceed post
                         </button>
                     </div>
             </div>

@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 use App\Models\Consumedstock;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class StockChart extends BaseChart
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
+
         $this->stocks1=Stock::whereDate('created_at',today())->sum(DB::raw('price*quantity'));
         $this->stocks2=Stock::whereDate('created_at',today()->subDays(1))->sum(DB::raw('price*quantity'));
         $this->stocks3=Stock::whereDate('created_at',today()->subDays(2))->sum(DB::raw('price*quantity'));

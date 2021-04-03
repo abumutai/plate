@@ -42,8 +42,8 @@
         }
         .popup-form input[type = "text"], .popup-form input[type = "password"], .popup-form input[type = "email"]{
             border-radius: 15px;
-            background-color: rgba(255, 255, 255, 0.6);
-            color: #fff;
+            background-color: rgba(87, 84, 84, 0.6);
+            color: #000;
             transition-duration: 0.24s;
         }
 
@@ -94,13 +94,13 @@
     <!-- Login modal -->
     <div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content modal-popup" style="background-repeat:no-repeat; background-size: cover; background-color: transparent; border-radius:20px">
+            <div class="modal-content modal-popup" style="background-repeat:no-repeat; background-size: cover; background-color: white; border-radius:20px">
                 
                 <a href="#" class="close-link" style="color:red"><i class="icon_close_alt2"></i></a>
                 <form action="{{route('login')}}" method="POST" class="popup-form" id="myLogin" name="loginForm">
                     @csrf
-                    <div class="login_icon"><i class="fa fa-user fa-1x"></i></div>
-                    <input type="email" class="form-control form-white" name="email" placeholder="Email address" autocomplete="off"
+                    <div class="login_icon"><i class="fa fa-user fa-1x" style="color: rgba(87, 84, 84, 0.6) "></i></div>
+                    <input type="email" autofocus class="form-control form-white" name="email" placeholder="Email address" autocomplete="off"
                            >
                     <input type="password" class="form-control form-white" name="password" placeholder="Password"
                            >
@@ -122,9 +122,9 @@
     <!-- Register modal -->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content modal-popup" style="background-repeat:no-repeat; background-size: cover; background-color: transparent; border-radius:20px">
+            <div class="modal-content modal-popup" style="background-repeat:no-repeat; background-size: cover; background-color: white; border-radius:20px">
                 
-                <a href="#" class="close-link" style="color:red;"><i class="icon_close_alt2"></i></a>
+                <a href="#" class="close-link" style="color:red;"><i class="icon_close_alt2" style="color:  rgba(87, 84, 84, 0.6)"></i></a>
                 <form method="POST" action="{{ route('register') }}" class="popup-form" id="myRegister"
                       name="registerForm">
                     @csrf

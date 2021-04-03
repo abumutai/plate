@@ -87,7 +87,7 @@ class RestaurantController extends Controller
 
         $data = request()->validate([
             'name' => [],
-            "email" => [],
+            "email" => ['unique:users'],
             "password" => [],
             "role_id" => [],
             "restaurant_profile_id" => [],

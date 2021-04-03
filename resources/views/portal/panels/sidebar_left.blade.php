@@ -66,25 +66,6 @@ use App\Helpers\Helper;$configData = Helper::applClasses();
                     @endif
                     @endforeach
                     @endif
-                    
-                    <li>
-                        <div class="progress-container progress-primary m-t-10">
-                            <span class="progress-badge">Traffic this Month</span>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
-                                    <span class="progress-value">67%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-container progress-info">
-                            <span class="progress-badge">Server Load</span>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" style="width: 86%;">
-                                    <span class="progress-value">86%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li> 
                 </ul>
             </div>
         </div>

@@ -170,7 +170,7 @@
                             <div class="col-md-3 col-sm-3">
                                 <div class="go_to">
                                     <div>
-                                        <a href="{{route('pages.restaurants.menu',$menu->restaurant_profile)}}#{{combineText($menu->category->title)}}" class="btn_1">View Item</a>
+                                        {{-- <a href="{{route('pages.restaurants.menu',$menu->restaurant_profile)}}#{{combineText($menu->category->title)}}" class="btn_1">View Item</a> --}}
                                     </div>
                                 </div>
                             </div>
