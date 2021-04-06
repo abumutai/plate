@@ -17,23 +17,23 @@ class StockChart extends BaseChart
     public function __construct(Request $request)
     {
 
-        $this->stocks1=Stock::whereDate('created_at',today())->sum(DB::raw('price*quantity'));
-        $this->stocks2=Stock::whereDate('created_at',today()->subDays(1))->sum(DB::raw('price*quantity'));
-        $this->stocks3=Stock::whereDate('created_at',today()->subDays(2))->sum(DB::raw('price*quantity'));
-        $this->stocks4=Stock::whereDate('created_at',today()->subDays(3))->sum(DB::raw('price*quantity'));
-        $this->stocks5=Stock::whereDate('created_at',today()->subDays(4))->sum(DB::raw('price*quantity'));
-        $this->stocks6=Stock::whereDate('created_at',today()->subDays(5))->sum(DB::raw('price*quantity'));
-        $this->stocks7=Stock::whereDate('created_at',today()->subDays(6))->sum(DB::raw('price*quantity'));
-        $this->stocks8=Stock::whereDate('created_at',today()->subDays(7))->sum(DB::raw('price*quantity'));
+        // $this->stocks1=Stock::whereDate('created_at',today())->sum(DB::raw('price*quantity'));
+        // $this->stocks2=Stock::whereDate('created_at',today()->subDays(1))->sum(DB::raw('price*quantity'));
+        // $this->stocks3=Stock::whereDate('created_at',today()->subDays(2))->sum(DB::raw('price*quantity'));
+        // $this->stocks4=Stock::whereDate('created_at',today()->subDays(3))->sum(DB::raw('price*quantity'));
+        // $this->stocks5=Stock::whereDate('created_at',today()->subDays(4))->sum(DB::raw('price*quantity'));
+        // $this->stocks6=Stock::whereDate('created_at',today()->subDays(5))->sum(DB::raw('price*quantity'));
+        // $this->stocks7=Stock::whereDate('created_at',today()->subDays(6))->sum(DB::raw('price*quantity'));
+        // $this->stocks8=Stock::whereDate('created_at',today()->subDays(7))->sum(DB::raw('price*quantity'));
 
-        $this->stocks8=Consumedstock::whereDate('created_at',today())->sum(DB::raw('price*quantity'));
-        $this->stocks9=Consumedstock::whereDate('created_at',today()->subDays(1))->sum(DB::raw('price*quantity'));
-        $this->stocks10=Consumedstock::whereDate('created_at',today()->subDays(2))->sum(DB::raw('price*quantity'));
-        $this->stocks11=Consumedstock::whereDate('created_at',today()->subDays(3))->sum(DB::raw('price*quantity'));
-        $this->stocks12=Consumedstock::whereDate('created_at',today()->subDays(4))->sum(DB::raw('price*quantity'));
-        $this->stocks13=Consumedstock::whereDate('created_at',today()->subDays(5))->sum(DB::raw('price*quantity'));
-        $this->stocks14=Consumedstock::whereDate('created_at',today()->subDays(6))->sum(DB::raw('price*quantity'));
-        $this->stocks15=Stock::whereDate('created_at',today()->subDays(6))->sum(DB::raw('price*quantity'));
+        // $this->stocks8=Consumedstock::whereDate('created_at',today())->sum(DB::raw('price*quantity'));
+        // $this->stocks9=Consumedstock::whereDate('created_at',today()->subDays(1))->sum(DB::raw('price*quantity'));
+        // $this->stocks10=Consumedstock::whereDate('created_at',today()->subDays(2))->sum(DB::raw('price*quantity'));
+        // $this->stocks11=Consumedstock::whereDate('created_at',today()->subDays(3))->sum(DB::raw('price*quantity'));
+        // $this->stocks12=Consumedstock::whereDate('created_at',today()->subDays(4))->sum(DB::raw('price*quantity'));
+        // $this->stocks13=Consumedstock::whereDate('created_at',today()->subDays(5))->sum(DB::raw('price*quantity'));
+        // $this->stocks14=Consumedstock::whereDate('created_at',today()->subDays(6))->sum(DB::raw('price*quantity'));
+        // $this->stocks15=Stock::whereDate('created_at',today()->subDays(6))->sum(DB::raw('price*quantity'));
      // dd($this->stocks3);
     }
     /**
