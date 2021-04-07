@@ -13,7 +13,7 @@ class CreateProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->integer('restaurant_profile_id');
             $table->string('name');
@@ -28,6 +28,6 @@ class CreateProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('product_categories');
     }
 }
