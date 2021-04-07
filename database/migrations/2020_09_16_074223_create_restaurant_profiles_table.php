@@ -20,7 +20,7 @@ class CreateRestaurantProfilesTable extends Migration
             $table->string('title')->nullable();
             $table->string('headline')->nullable();
 
-            $table->integer('category_id')->index(('category_id'));
+            $table->integer('category_id')->index('category_id')->nullable();
             $table->string('location')->nullable();
             $table->integer('city_id')->index('city_id')->nullable();
             $table->integer('country_id')->index('country_id')->nullable();
