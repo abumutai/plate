@@ -1,0 +1,64 @@
+{
+    "menu": [
+        {
+            "url": "",
+            "navheader": "Main",
+            "icon": ""
+        },
+        {
+            "url": "dashboard",
+            "name": "Dashboard",
+            "icon": "zmdi zmdi-home",
+            "submenu": [
+                {
+                    "url": "dashboard",
+                    "uri": "dashboard",
+                    "name": "Analytics",
+                    "icon": ""
+                },
+                {
+                    "url": "dashboard",
+                    "uri": "admin.dashboard",
+                    "name": "Admin Dashboard",
+                    "icon": ""
+                },
+                {
+                    "url": "manage users",
+                    "uri": "admin.manage.users",
+                    "name": "Manage Users",
+                    "icon": ""
+                }
+               
+            ]
+        },
+     
+        {
+            "url": "",
+            "name": "System",
+            "icon": "zmdi zmdi-lock",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "Settings",
+                    "icon": ""
+                },
+                {
+                    "url": "",
+                    "name": "Configuration",
+                    "icon": ""
+                },
+                {
+                    "url": "generate/qr",
+                    "uri": "qr.generate.view",
+                    "name": "QR Code",
+                    "icon": ""
+                }
+            ]
+        },
+        {
+            "url": "",
+            "navheader": "Extra",
+            "icon": ""
+        }
+    ]
+}

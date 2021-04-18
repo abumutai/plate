@@ -1,0 +1,160 @@
+{
+    "menu": [
+        {
+            "url": "",
+            "navheader": "Main",
+            "icon": "",
+            "policy": "restaurant"
+        },
+        {
+            "url": "",
+            "name": "Dashboard",
+            "icon": "zmdi zmdi-home",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "Analytics",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "Blog",
+                    "icon": "feather icon-circle"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "Orders",
+            "icon": "zmdi zmdi-shopping-cart",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "View",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "Review",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "navheader": "CATEGORIES & MENUS MANAGER",
+            "icon": "",
+            "policy": "restaurant"
+        },
+        {
+            "url": "",
+            "name": "Menus",
+            "icon": "zmdi zmdi-assignment",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "List",
+                    "icon": "Gallery"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "Categories",
+            "icon": "zmdi zmdi-grid",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "View All",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "navheader": "RESTAURANTS MANAGEMENT",
+            "icon": "",
+            "policy": "restaurant"
+        },
+        {
+            "url": "",
+            "name": "Profile",
+            "icon": "zmdi zmdi-delicious",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "Personal",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "Restaurant",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "Invoices",
+            "icon": "zmdi zmdi-lock",
+            "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "View all",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "recent",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "name": "System",
+            "icon": "zmdi zmdi-lock",
+               "policy": "restaurant",
+            "submenu": [
+                {
+                    "url": "",
+                    "name": "Settings",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "Configuration",
+                    "icon": "",
+                    "policy": "restaurant"
+                },
+                {
+                    "url": "",
+                    "name": "QR Code",
+                    "icon": "",
+                    "policy": "restaurant"
+                }
+            ]
+        },
+        {
+            "url": "",
+            "navheader": "Extra",
+            "icon": "",
+            "policy": "restaurant"
+        }
+    ]
+}

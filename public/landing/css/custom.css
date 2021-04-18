@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* YOUR CUSTOM CSS */
+.modal-backdrop {
+    z-index: 1040!important;
+}
+.modal {
+    z-index: 1050!important;
+}
+header{
+    z-index:1000!important;
+}
