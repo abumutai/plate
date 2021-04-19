@@ -636,7 +636,21 @@
                           <span>All Categories</span>
                         </a>
                       </li>
+                      <li class="nav-item">
+                        <a href="{{route('profitloss')}}" class="nav-link">
+                          <i class="fa fa-arrow-right nav-icon"></i>
+                          <span>Profit/Loss</span>
+                        </a>
+                      </li>
                     </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('expenses')}}" class="nav-link {{ Request::is('expenses') ? 'active' : '' }}">
+                      <i class="fas fa-coins nav-icon"></i>
+                      <span>
+                        Expenses
+                      </span>
+                    </a>
                   </li>
                 @can('roles')
                 <li class="nav-item">

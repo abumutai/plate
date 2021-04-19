@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ProductsController;
@@ -219,7 +220,7 @@ Route::post("/api/restaurants/all","MobileController@getAllRestaurants");
 
 
 
- //Backend routes 
+ //Kitchen routes 
  
 Route::get('/reports',[ReportsController::class,'stocks'])->name('reports');
 Route::get('/reportsget',[ReportsController::class,'get'])->name('reportsget');
@@ -227,6 +228,8 @@ Route::get('/reportsexpiry',[ReportsController::class,'expiry'])->name('reports.
 Route::get('/reportsexpiryget',[ReportsController::class,'expiryresult'])->name('reportsget.expiry');
 Route::get('/print/{query}',[ReportsController::class,'printPDF'])->name('reports.print');
 Route::get('/printsummary',[ReportsController::class,'printsummary'])->name('reports.summary');
+Route::get('/profitloss',[ReportsController::class,'profitloss'])->name('profitloss');
+Route::get('/printpl',[ReportsController::class,'printprofitloss'])->name('profitloss.print');
 
 Route::middleware(['admin'])->group(function(){
     Route::get('/dashboard/kitchen', [DashboardController::class,'index'])->middleware(['auth'])->name('kitchen.dashboard');
@@ -327,3 +330,10 @@ Route::post('/conversions/store',[ConversionController::class,'store'])->name('c
 Route::get('/edit/{id}/conversions',[ConversionController::class,'edit'])->name('conversions.edit');
 Route::patch('/update/{id}/conversions',[ConversionController::class,'update'])->name('conversions.update');
 Route::get('/delete/{id}/conversions',[ConversionController::class,'destroy'])->name('conversions.delete');
+
+Route::get('/expenses/index',[ExpenseController::class,'index'])->name('expenses');
+Route::get('/expenses/create',[ExpenseController::class,'create'])->name('expenses.create');
+Route::post('/expenses/store',[ExpenseController::class,'store'])->name('expenses.store');
+Route::get('/edit/{id}/expenses',[ExpenseController::class,'edit'])->name('expenses.edit');
+Route::patch('/update/{id}/expenses',[ExpenseController::class,'update'])->name('expenses.update');
+Route::get('/delete/{id}/expenses',[ExpenseController::class,'destroy'])->name('expenses.delete');

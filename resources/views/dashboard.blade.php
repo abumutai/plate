@@ -23,6 +23,148 @@
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
       <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-coins"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Expenses Today</span>
+              <span class="info-box-number">
+                {{$todayexpenses}}
+                <small>Kshs</small>
+              </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-bill-alt"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Moved Stock Today</span>
+              <span class="info-box-number">{{$todaypurchases}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix hidden-md-up"></div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Sales Today</span>
+              <span class="info-box-number">{{$todaysales}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-warning elevation-1 text-white"><i class="fas fa-balance-scale text-white"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">{{$todaysales-($todayexpenses+$todaypurchases)>0?'Profit':'Loss'}}</span>
+              <span class="info-box-number">{{$todaysales-($todayexpenses+$todaypurchases)}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-header border-0">
+              <h3 class="card-title">Recent Expenses</h3>
+              <div class="card-tools">
+              
+              </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-striped table-valign-middle">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Expense</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($expenses ->take(5) as $expense)
+                <tr>
+                  <td>{{$expense->id}}</td>
+                  <td>{{$expense->name}}</td>
+                  <td>{{$expense->description}}</td>
+                  <td>{{$expense->amount}}</td>
+                </tr>
+                @endforeach
+                </tbody>
+              </table>
+              <div class="card-footer text-center"style="color:white;background-color: indigo">
+                <a href="{{route('expenses')}}" class="uppercase" style="color: white" >View All Expenses</a>
+             </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- Info Boxes Style 2 -->
+          <div class="info-box mb-3 bg-warning" style="color: white;">
+            <span class="info-box-icon text-white"><i class="fas fa-money-check-alt"></i></span>
+
+            <div class="info-box-content text-white">
+              <span class="info-box-text ">Total Expenses</span>
+              <span class="info-box-number">{{$expenses->sum('amount')}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          <div class="info-box mb-3 bg-success">
+            <span class="info-box-icon"><i class="fa fa-donate"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Total Moved Stock</span>
+              <span class="info-box-number">{{$purchases}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          <div class="info-box mb-3 bg-danger">
+            <span class="info-box-icon"><i class="fas fa-hand-holding-usd"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Total Sales</span>
+              <span class="info-box-number">{{$sales}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          <div class="info-box mb-3 bg-info">
+            <span class="info-box-icon"><i class="fa fa-percentage"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">{{$sales-($expenses->sum('amount')+$purchases)>0?'Profit':'Loss'}}</span>
+              <span class="info-box-number">{{$sales-($expenses->sum('amount')+$purchases)}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>  
+      </div>
+      <div class="row">
         @foreach ($availablestocks->take(8) as $stock)
         {{-- <div class="col-lg-3 col-6"> --}}
           @foreach ($subcategories as $subcategory)
@@ -63,6 +205,7 @@
         @endforeach
         <!-- ./col -->
       </div>
+      
       <div class="row">
         <div class="card col-md-6">
             <div class="card-header border-transparent">
@@ -157,12 +300,12 @@
         @endforeach
               </ul>
             </div>
-            <!-- /.card-footer --><div class="card-footer text-center"style="color:white;background-color: indigo">
-            <a href="{{route('stock.available')}}" class="uppercase" style="color: white" >View All</a>
-          </div>
+            <div class="card-footer text-center"style="color:white;background-color: indigo">
+              <a href="{{route('stock.available')}}" class="uppercase" style="color: white" >View All</a>
+           </div>
           </div>
       </div>
-      <div class="content">
+      {{-- <div class="content">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -189,7 +332,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   </section>
 @endsection

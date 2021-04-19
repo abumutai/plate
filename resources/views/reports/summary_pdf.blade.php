@@ -139,12 +139,6 @@
                 @endif
                 
                 </tbody>
-                {{-- <tfoot>
-                <tr style="text-align: right;">
-                  <th colspan="4">Total Value</th>
-                  <th>CSS grade</th>
-                </tr>
-                </tfoot> --}}
               </table>
             </div>
             <!-- /.card-body -->

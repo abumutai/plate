@@ -36,7 +36,8 @@ class CreateRestaurantProfilesTable extends Migration
 
             $table->text('about')->nullable();
             $table->string('website')->nullable();
-            $table->double('kula_points_ratio')->nullable();;
+            $table->double('kula_points_ratio')->nullable();
+            $table->double('delivery_fee')->nullable();
 
             $table->string('coordinates')->nullable();
             $table->string('status')->nullable();;

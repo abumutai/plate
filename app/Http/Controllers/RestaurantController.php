@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 
 use App\RestaurantService;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
@@ -70,7 +70,7 @@ class RestaurantController extends Controller
     {
         $user = auth()->user();
      
-        $users = User::where('role_id',4)->where('restaurant_profile_id',$user->restaurant_profile_id)->get();
+        $users = User::where('role_id',4)->orWhere('role_id',6)->where('restaurant_profile_id',$user->restaurant_profile_id)->get();
         return view('portal.waiter_list', compact('user','users'));
    
     }
@@ -82,7 +82,7 @@ class RestaurantController extends Controller
    
     }
     
-    public function addWaiter()
+    public function addWaiter(Request $request)
     {
 
         $data = request()->validate([
@@ -93,13 +93,13 @@ class RestaurantController extends Controller
             "restaurant_profile_id" => [],
             'comment' => [],
         ]);
-      
+        $role_id=$request->role;
         $user = auth()->user();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => 4,
+            'role_id' => $role_id,
             'email_verified_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),
             'restaurant_profile_id' => $user->restaurant_profile_id ?? null

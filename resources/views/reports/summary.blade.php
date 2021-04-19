@@ -4,7 +4,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container">
-            <h2 class="text-center display-4">Reports</h2>
+            <h2 class="text-center display-4">Stock Activity Reports</h2>
             <form action="{{route('reportsget.expiry')}}" method="GET">
                 <div class="row">
                     <div class="col-md-12 ">

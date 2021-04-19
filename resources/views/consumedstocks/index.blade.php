@@ -56,6 +56,7 @@
                   <th>#</th>
                   <th>Item</th>
                   <th>Quantity</th>
+                  <th>Expected Item</th>
                   <th>Date Moved</th>
                   <th>Purpose</th>
                   <th>Price</th>
@@ -73,6 +74,7 @@
                         <td>{{$consumedstock->id}}</td>
                         <td>{{$consumedstock->subcategory}}</td>
                         <td>{{$consumedstock->quantity}}</td>
+                        <td>{{$consumedstock->expected!=null?$consumedstock->expected.' Plates/Items':'Not Set' }} </td>
                         <td>{{$consumedstock->created_at->format('m-d')}}</td>
                         <td>{{$consumedstock->purpose}}</td>
                         <td>{{$consumedstock->price}}</td>
