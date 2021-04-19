@@ -1,4 +1,15 @@
 
+@php
+$not_paid = array();
+$cash_paid = array();
+$mpesapaid = array();
+$user=auth()->user();
+$restaurant=$user->restaurant_profile;
+$orders=$user->restaurant_profile->orders;                               
+@endphp
+
+
+
 @extends('portal.layouts.restaurant_config')
 
 @section('title', 'Payments')
@@ -18,8 +29,58 @@
         <div class="row">
             <div class="col-lg-5 col-md-5 col-sm-12">
                 <h2>Dashboard
-                    <small>Payments Voucher For The customers</small>
                 </h2>
+                    <div class="text-left">
+                    <small>Payments Voucher For The customers</small>
+                     <!-- This Declaration to find not paid total amount -->
+                                    @php
+                             
+                                    foreach($restaurant->orders as $order){
+                                        if($order->payment_option == 0 and $order->status == 3){
+                                         $not_paid[] = $order->menu->pricing;
+
+                                        }
+
+                                    }
+                                    $x = (array_sum($not_paid)) ;
+                                   
+                                    
+                                    @endphp
+
+                     <!-- This Declaration to find cash paid total amount -->
+                                    @php
+                             
+                                    foreach($restaurant->orders as $order){
+                                        if($order->payment_option == 1 and $order->status == 3){
+                                         $cash_paid[] = $order->menu->pricing;
+
+                                        }
+
+                                    }
+                                    $y = (array_sum($cash_paid)) ;
+                                   
+                                    
+                                    @endphp
+                     <!-- This Declaration to find M-pesa paid total amount -->
+                                    @php
+                             
+                                    foreach($restaurant->orders as $order){
+                                        if($order->payment_option == 2 and $order->status == 3){
+                                         $mpesapaid[] = $order->menu->pricing;
+
+                                        }
+
+                                    }
+                                    $z = (array_sum($mpesapaid)) ;
+                                   
+                                    
+                                    @endphp
+                              
+                        <div class="animate">
+                            <progress style="color: #F70" id="progressBar" max="{{($x + $y + $z)}}" value="{{ ($y +$z)}}">></progress>
+	                        
+                        </div>
+                    </div>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                 <div class="inlineblock text-center m-r-15 m-l-15 hidden-md-down">
@@ -52,7 +113,8 @@
         <div class="row clearfix">
             <div class="col-lg-12">
                 <div class="card product_item_list">
-                    <h5 class="card-title">{{$user->restaurant_profile->title}}</h5>
+                    <h3 class="card-title" style="color: #111">{{$user->restaurant_profile->title}}</h3>
+                    
                     <div class="body table-responsive">
                         <div class="d-flex justify-content-between mb-4">
                             <h4 class="btn btn-info">NOT PAID</h4>
@@ -106,6 +168,11 @@
                                     @endif
                             </tbody>
                         </table>
+                            <tfoot>
+                            <div class="d-flex justify-content-end mb-4">
+                                <a class="btn btn-info" href="{{ URL::to('#') }}"> Total Amount Ksh  {{$x}} </a>
+                            </div>
+                            </tfoot>
                     </div>
                 </div>
                 <div class="card product_item_list">
@@ -157,6 +224,11 @@
                                     @endif
                             </tbody>
                         </table>
+                        <tfoot>
+                            <div class="d-flex justify-content-end mb-4">
+                                <a class="btn btn-info" href="{{ URL::to('#') }}"> Total Amount Ksh  {{$y}} </a>
+                            </div>
+                            </tfoot>
                     </div>
                 </div>
 
@@ -210,6 +282,11 @@
                                     @endif
                             </tbody>
                         </table>
+                        <tfoot>
+                            <div class="d-flex justify-content-end mb-4">
+                                <a class="btn btn-info" href="{{ URL::to('#') }}"> Total Amount Ksh  {{$z}} </a>
+                            </div>
+                            </tfoot>
                     </div>
                 </div>
             </div>
@@ -229,7 +306,19 @@
 
 
 
-
+<script>
+ $(".meter > span").each(function () {
+  $(this)
+    .data("origWidth", $(this).width())
+    .width(0)
+    .animate(
+      {
+        width: $(this).data("origWidth")
+      },
+      1200
+    );
+});
+</script>
 
 
 
