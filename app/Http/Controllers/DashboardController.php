@@ -27,7 +27,6 @@ class DashboardController extends Controller
     
     public function index()
     {
-
         $user=auth()->user();
         $restaurant=$user->restaurant_profile;
         $availablestocks=AvailableStock::all()->where('restaurant_profile_id',$restaurant->id);

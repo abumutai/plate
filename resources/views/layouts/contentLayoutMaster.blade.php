@@ -100,10 +100,19 @@
                 <form action="{{route('login')}}" method="POST" class="popup-form" id="myLogin" name="loginForm">
                     @csrf
                     <div class="login_icon"><i class="fa fa-user fa-1x" style="color: rgba(87, 84, 84, 0.6) "></i></div>
-                    <input type="email" autofocus class="form-control form-white" name="email" placeholder="Email address" autocomplete="off"
-                           >
-                    <input type="password" class="form-control form-white" name="password" placeholder="Password"
-                           >
+                    <input type="email" id="email" autofocus class="form-control form-white  @error('email') is-invalid @enderror" name="email" placeholder="Email address">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+
+                    <input type="password" id="password" class="form-control form-white @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <div class="text-left">
                         <a href="{{ route('password.request') }}">Forgot Password?</a>
                     </div>

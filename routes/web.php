@@ -67,6 +67,15 @@ Route::patch('/gallery/{restaurant}/add','RestaurantController@addToGallery')->n
 
 Route::get('/portal/orders', "PortalController@viewOrders" )->name('orders');
 Route::get('/portal/completed/orders', "PortalController@viewCompletedOrders" )->name('orders.completed');
+Route::get('/portal/cancelled/orders', "PortalController@cancelledOrders" )->name('orders.cancelled');
+
+Route::get('/portal/today', "PortalController@today" )->name('today');
+Route::get('/portal/weekly', "PortalController@weekly" )->name('weekly');
+Route::get('/portal/monthly', "PortalController@monthly" )->name('monthly');
+Route::get('/portal/report', "PortalController@report" )->name('report');
+Route::get('/portal/orders/pdf', 'PortalController@createPDF')->name('all.pdf');
+Route::get('/portal/receipts', 'PortalController@receipts')->name('receipts');
+Route::get('/portal/receipt', 'PortalController@receipt')->name('receipt');
 
 
 Route::get('/portal/customer/orders', "PortalController@viewCustomerOrders" )->name('customer.orders');
@@ -158,6 +167,10 @@ Route::get('/checkout', function () {
 
 Route::get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
 Route::get('/waiter/dashboard', 'RestaurantController@waiterDashboard')->name('waiter.dashboard');
+Route::get('/cashier/dashboard', 'RestaurantController@cashierDashboard')->name('cashier.dashboard');
+Route::get('/cashier/mpesa/{order_id}', 'RestaurantController@mpesa')->name('mpesa');
+Route::get('/cashier/cash/{order_id}', 'RestaurantController@cash')->name('cash');
+Route::get('/cashier/all/{user_id}', 'RestaurantController@complete')->name('cash');
 
 Route::get('/admin/manage/users', 'AdminController@manageUsers')->name('admin.manage.users');
 
@@ -165,6 +178,7 @@ Route::get('/admin/manage/users', 'AdminController@manageUsers')->name('admin.ma
 Route::get('/admin/restaurant/update', 'AdminController@UpdateStatus')->name('admin.restaurant.update');
 Route::get('/suspend/{restaurant_profile_id}', 'AdminController@suspend');
 Route::get('/activate/{restaurant_profile_id}', 'AdminController@activate');
+Route::get('/banned/{restaurant_profile_id}', 'AdminController@banned');
 
 
 Route::get('/admin/session/order', 'AdminController@keepOrderID')->name('admin.session.order');
@@ -221,6 +235,7 @@ Route::post("/api/restaurants/all","MobileController@getAllRestaurants");
 
 
  //Kitchen routes 
+ //Backend routes 
  
 Route::get('/reports',[ReportsController::class,'stocks'])->name('reports');
 Route::get('/reportsget',[ReportsController::class,'get'])->name('reportsget');

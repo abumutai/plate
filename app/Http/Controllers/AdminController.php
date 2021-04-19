@@ -57,6 +57,18 @@ class AdminController extends Controller
             return redirect('/admin/dashboard')->with('error', 'An error occured while activating a buy Offer');
         }
     }
+    public function banned($restaurant_profile_id)
+    {
+
+
+        try {
+
+            RestaurantProfile::where(['id' => $restaurant_profile_id])->update(['status' => '3']);
+            return redirect('/admin/manage/users')->with('success', 'User has been Banned');
+        } catch (\Exception $e) {
+            return redirect('/admin/dashboard')->with('error', 'An error occured while activating a buy Offer');
+        }
+    }
 
     public function UpdateStatus(Request $request)
     {

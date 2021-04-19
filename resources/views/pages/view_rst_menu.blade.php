@@ -65,6 +65,20 @@
         font-size: 30px;
     }
 
+    .zoom {
+            padding: 50px;
+            transition: transform .2s; /* Animation */
+            width: 400px;
+            height: 400px;
+            cursor: default;
+           
+        }
+
+        .zoom:hover {
+            transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            cursor: pointer;
+        }
+
     
 </style>
 @endsection
@@ -155,40 +169,22 @@
                 @foreach(\App\Category::all() as $category)
                 <h3 id="{{combineText($category->title,'_')}}" style="color: #f5da42;">{{$category->title}}</h3>
                 <p>{{$category->description}}</p>
-                <table class="table table-striped cart-list">
-                    <thead>
-                        <tr>
-                            <th>
-                                Item
-                            </th>
-                            <th>
-                                Price
-                            </th>
-                            <th>
-                                Order
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+               
                         @foreach($restaurant->menus->where('category_id',$category->id) as $menu)
 
-                        <tr class="" style="background-color: #f5da42;">
-                            <td>
-                                <figure class="thumb_menu_list">
-                                    <img src="{{getMenuImage($menu)}}" alt="thumb">
-                                </figure>
-                                <h5>{{$count++}}. {{$menu->title}}</h5>
-                                <p>
-                                    {{$menu->description}}
-                                </p>
-                            </td>
-                            <td>
-                                <strong>{{$menu->currency}} {{$menu->pricing}}</strong>
-                            </td>
-                            <td class="options">
+                <div class="card" style="width: 35rem;" class="row d-flex justify-content-between mb-4">
+                            <div class="card-body" class="col-md-8">
+                            
+                             <img src="{{getMenuImage($menu)}}" alt="thumb"  class="zoom" width ="100%">
+                                <div class="col-md-4 text-left"><h5>{{$menu->title}}</h5></div>
+                                <div class="col-md-4"> <p class="card-text"> {{$menu->description}}</p> </div>
+                                <div class="col-md-4"> <strong>{{$menu->currency}} {{$menu->pricing}}</strong></div>
+                            
+                            </div>
+                    
+                                <span class="options text-right">
                                 <div class="dropdown dropdown-options">
-                                    <a href="" @guest data-toggle="modal" data-target="#login_2" @else class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" @endguest><i class="glyphicon glyphicon-plus-sign
- lg" style="font-size: 50px"></i></a>
+                                    <a href="" @guest data-toggle="modal" data-target="#login_2" @else class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" @endguest><i class="glyphicon glyphicon-plus-sign lg" style="font-size: 50px"></i></a>
                                     <form class="dropdown-menu addCartForm" name="addCartForm" id="addCartForm" method="get" action="{{route('cart.add',$menu)}}">
                                         <h5>Select an option</h5>
                                         <input type="hidden" name="menu_id" value="{{$menu->id}}">
@@ -216,8 +212,10 @@
                                         <button class="add_to_basket" type="submit">Add to cart</button>
                                     </form>
                                 </div>
-                            </td>
-                        </tr>
+                            </span>
+                </div>
+                <br><hr>
+                        
                         @endforeach
                         @if($restaurant->menus->where('category_id',$category->id)->count()<1) <tr>
                             <td colspan="2">No items available</td>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Table;
+use Carbon\Carbon;
+use PDF;
 
 
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +26,57 @@ class PortalController extends Controller
     public function index(){
         $user=auth()->user();
         $restaurant=$user->restaurant_profile;
-        return view('portal.dashboard',compact('user','restaurant'));
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.dashboard',compact('user','restaurant', 'orders'));
+    }
+    public function today(){
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.today_order_report',compact('user','restaurant', 'orders'));
+    }
+    public function weekly(){
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.week_orders_report',compact('user','restaurant', 'orders'));
+    }
+    public function monthly(){
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.month_orders_report',compact('user','restaurant', 'orders'));
+    }
+    public function receipts(){
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.print_receipts',compact('user','restaurant', 'orders'));
+    }
+    public function receipt($order_id){
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.receipt',compact('user','restaurant', 'orders'));
+    }
+    public function createPDF() {
+        // retreive all records from db
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+  
+        // share data to view
+        view()->share('portal.today_order_report', compact($user, $restaurant, $orders));
+        $pdf = PDF::loadView('portal.today_order_report',compact('user','restaurant', 'orders'));
+  
+        // download PDF file with download method
+        return $pdf->download('today_report.pdf');
+      }
+    public function report(){
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+        return view('portal.orders_report',compact('user','restaurant', 'orders'));
     }
      public function menuList(){
         $user=auth()->user();
@@ -92,6 +144,12 @@ return response($image)->header('Content-type','image/png');
         $user=auth()->user();
         $orders=$user->orders;
         return view('portal.customer_completed_orders_list',compact('user','orders'));
+    }
+    public function cancelledOrders(){
+        $user=auth()->user();
+        $orders=$user->orders;
+        $restaurant=$user->restaurant_profile;
+        return view('portal.cancelled_orders_list',compact('user','orders'));
     }
     
     public function profile(){

@@ -13,11 +13,11 @@ use App\Helpers\Helper;$configData = Helper::applClasses();
                     <li>
                         <div class="user-info">
                            
-                              @if(isset($restaurant))
-                            <div class="image"><a href="{{route('profile')}}"><img src="{{$restaurant->logo ?? asset('images/restaurants/logo/rest_default.png')}}" alt="User"></a></div>
+                            @if(isset($restaurant))
+                                <div class="image"><a href="{{route('profile')}}"><img src="{{$restaurant->logo ?? asset('images/restaurants/logo/rest_default.png')}}" alt="User"></a></div>
 
                             @else
-                            <div class="image"><a href="{{route('user.profile')}}"><img src="{{$user->avatar ?? asset('images/logo/SVG/chef2.svg')}}" alt="User"></a></div>
+                                <div class="image"><a href="{{route('user.profile')}}"><img src="{{$user->avatar ?? asset('images/logo/SVG/chef2.svg')}}" alt="User"></a></div>
 
                             @endif
 

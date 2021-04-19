@@ -75,7 +75,6 @@ class ConsumedstocksController extends Controller
         {
             return redirect()->route('consumedstocks.create')->with('error','The available stock is too low');
         }
-
         $validated=$request->validate([
             'item'=>'required|string',
             'quantity'=>'required|numeric|min:1',

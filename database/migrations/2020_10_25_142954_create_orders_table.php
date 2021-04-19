@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('restaurant_service_id')->index('restaurant_service_id')->comment('order type');
             $table->integer('restaurant_profile_id')->index('restaurant_profile_id');
             $table->integer('status')->default(0);
+            $table->text('payment_option')->default('Not Paid');
 
             $table->text('notes')->nullable();
 
