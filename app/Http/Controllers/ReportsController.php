@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\Menu;
+use App\Order;
+use Carbon\Carbon;
 use App\Models\Stock;
+use App\Models\Expense;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\Consumedstock;
@@ -134,7 +138,78 @@ class ReportsController extends Controller
         $subcategories=Subcategory::all()->where('restaurant_profile_id',$restaurant->id);
         return view('reports.summary',compact('destroyedstocks','movedstocks','toperiod','period','subcategory','stocks','subcategories','query'));
     }
-    
+    public function profitloss(Request $request)
+    {
+      
+        $period=$request->period;
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        if($period==null)
+        {
+            $period=today();
+        }
+        else if($period!=null)
+        {
+            $period=Carbon::parse($period)->format('Y-m-d');
+        }
+
+            $todaysales=0;
+            $todaypurchases=ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereDate('created_at',$period)->sum(DB::raw('price*quantity'));
+            $todayexpenses=Expense::where('restaurant_profile_id',$restaurant->id)->whereDate('created_at',$period)->sum('amount');
+            $todayorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereDate('created_at',$period)->get();
+            
+            $weeklysales=0;
+            $weeklypurchases=ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereBetween('created_at', [Carbon::parse($period)->startOfWeek(), Carbon::parse($period)->endOfWeek()])->sum(DB::raw('price*quantity'));
+            $weeklyexpenses=Expense::where('restaurant_profile_id',$restaurant->id)->whereBetween('created_at', [Carbon::parse($period)->startOfWeek(), Carbon::parse($period)->endOfWeek()])->sum('amount');
+            $weeklyorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereBetween('created_at', [Carbon::parse($period)->startOfWeek(), Carbon::parse($period)->endOfWeek()])->get();
+            
+            $monthlysales=0;
+            $monthlypurchases=ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereMonth('created_at',[Carbon::parse($period)->startOfMonth(), Carbon::parse($period)->endOfMonth()])->sum(DB::raw('price*quantity'));
+            $monthlyexpenses=Expense::where('restaurant_profile_id',$restaurant->id)->whereMonth('created_at',[Carbon::parse($period)->startOfMonth(), Carbon::parse($period)->endOfMonth()])->sum('amount');
+            $monthlyorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereMonth('created_at',[Carbon::parse($period)->startOfMonth(), Carbon::parse($period)->endOfMonth()])->get();
+
+            $yearlysales=0;
+            $yearlypurchases=ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereYear('created_at',[Carbon::parse($period)->startOfYear(), Carbon::parse($period)->endOfYear()])->sum(DB::raw('price*quantity'));
+            $yearlyexpenses=Expense::where('restaurant_profile_id',$restaurant->id)->whereYear('created_at',[Carbon::parse($period)->startOfYear(), Carbon::parse($period)->endOfYear()])->sum('amount');
+            $yearlyorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereYear('created_at',[Carbon::parse($period)->startOfYear(), Carbon::parse($period)->endOfYear()])->get();
+            
+            $menus= Menu::all()->where('restaurant_profile_id',$restaurant->id);
+       
+
+        foreach($todayorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $todaysales=$todaysales+$menu->pricing;
+                }
+            }
+        }
+
+        foreach($weeklyorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $weeklysales=$weeklysales+$menu->pricing;
+                }
+            }
+        }
+
+        foreach($monthlyorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $monthlysales=$monthlysales+$menu->pricing;
+                }
+            }
+        }
+
+        foreach($yearlyorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $yearlysales=$yearlysales+$menu->pricing;
+                }
+            }
+        }
+
+        return view('reports.profit_loss',compact('yearlysales','yearlypurchases','yearlyexpenses','monthlysales','monthlypurchases','monthlyexpenses','weeklysales','weeklypurchases','weeklyexpenses','todaypurchases','todaysales','period','todayexpenses'));
+    }
     public function printPDF($query)
     {
         $user=auth()->user();
@@ -163,6 +238,88 @@ class ReportsController extends Controller
         ];
         //dd($data);
          $pdf = PDF::loadView('reports.summary_pdf', $data)->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->stream();
+    }
+    public function printprofitloss(Request $request)
+    {
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $period=$request->period;
+        if($period==null)
+        {
+            $period=today();
+        }
+        else if($period!=null)
+        {
+            $period=Carbon::parse($period)->format('Y-m-d');
+        }
+            $todaysales=0;
+            $todayorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereDate('created_at',$period)->get();
+
+            $weeklysales=0;
+            $weeklyorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereBetween('created_at', [Carbon::parse($period)->startOfWeek(), Carbon::parse($period)->endOfWeek()])->get();
+            
+            $monthlysales=0;
+            $monthlyorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereMonth('created_at',[Carbon::parse($period)->startOfMonth(), Carbon::parse($period)->endOfMonth()])->get();
+
+            $yearlysales=0;
+            $yearlyorders=Order::where('restaurant_profile_id',$restaurant->id)->where('status',3)->whereYear('created_at',[Carbon::parse($period)->startOfYear(), Carbon::parse($period)->endOfYear()])->get();
+            
+            $menus= Menu::all()->where('restaurant_profile_id',$restaurant->id);
+       
+
+        foreach($todayorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $todaysales=$todaysales+$menu->pricing;
+                }
+            }
+        }
+
+        foreach($weeklyorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $weeklysales=$weeklysales+$menu->pricing;
+                }
+            }
+        }
+
+        foreach($monthlyorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $monthlysales=$monthlysales+$menu->pricing;
+                }
+            }
+        }
+
+        foreach($yearlyorders as $order){
+            foreach($menus as $menu){
+                if($order->menu_id==$menu->id){
+                    $yearlysales=$yearlysales+$menu->pricing;
+                }
+            }
+        }
+
+        $data= [
+                'period'=>$period,
+                'todaysales'=>$todaysales,
+                'todaypurchases'=>ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereDate('created_at',$period)->sum(DB::raw('price*quantity')),
+                'todayexpenses'=>Expense::where('restaurant_profile_id',$restaurant->id)->whereDate('created_at',$period)->sum('amount'),
+    
+                'weeklysales'=>$weeklysales,
+                'weeklypurchases'=>ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereBetween('created_at', [Carbon::parse($period)->startOfWeek(), Carbon::parse($period)->endOfWeek()])->sum(DB::raw('price*quantity')),
+                'weeklyexpenses'=>Expense::where('restaurant_profile_id',$restaurant->id)->whereBetween('created_at', [Carbon::parse($period)->startOfWeek(), Carbon::parse($period)->endOfWeek()])->sum('amount'),
+                
+                'monthlysales'=>$monthlysales,
+                'monthlypurchases'=>ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereMonth('created_at',[Carbon::parse($period)->startOfMonth(), Carbon::parse($period)->endOfMonth()])->sum(DB::raw('price*quantity')),
+                'monthlyexpenses'=>Expense::where('restaurant_profile_id',$restaurant->id)->whereMonth('created_at',[Carbon::parse($period)->startOfMonth(), Carbon::parse($period)->endOfMonth()])->sum('amount'),
+                
+                'yearlysales'=>$yearlysales,
+                'yearlypurchases'=>ConsumedStock::where('restaurant_profile_id',$restaurant->id)->whereYear('created_at',[Carbon::parse($period)->startOfYear(), Carbon::parse($period)->endOfYear()])->sum(DB::raw('price*quantity')),
+                'yearlyexpenses'=>Expense::where('restaurant_profile_id',$restaurant->id)->whereYear('created_at',[Carbon::parse($period)->startOfYear(), Carbon::parse($period)->endOfYear()])->sum('amount'),
+        ];
+       
+         $pdf = PDF::loadView('reports.plsummary', $data)->setOptions(['defaultFont' => 'sans-serif']);
         return $pdf->stream();
     }
 }

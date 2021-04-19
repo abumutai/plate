@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Consumedstock;
 use App\Models\AvailableStock;
 use App\Http\Controllers\Controller;
+use App\Models\Conversion;
 use App\Notifications\StockApproval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -74,6 +75,7 @@ class ConsumedstocksController extends Controller
         {
             return redirect()->route('consumedstocks.create')->with('error','The available stock is too low');
         }
+
         $validated=$request->validate([
             'item'=>'required|string',
             'quantity'=>'required|numeric|min:1',
@@ -83,7 +85,7 @@ class ConsumedstocksController extends Controller
             'subcategory'=>'required',
             'purpose'=>'required'
         ]);
-        
+            
             $stock= new Consumedstock;
             $stock->item=$request->item;
             $stock->restaurant_profile_id=$restaurant->id;
@@ -94,6 +96,12 @@ class ConsumedstocksController extends Controller
             $stock->category=$request->category;
             $stock->subcategory=$request->subcategory;
             $stock->purpose=$request->purpose;
+            $conversion= Conversion::all()->where('product',$request->subcategory)->first();
+            $stock->expected=null;
+            if($conversion!=null)
+            {
+                $stock->expected=($conversion->quantity)*$stock->quantity;
+            }
             $stock->save();
             $type='moved';
             $admin= User::all()->where('restaurant_profile_id',$restaurant->id)->where($user->role->id,2);

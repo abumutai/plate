@@ -32,7 +32,7 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-8 col-sm-12">
-                <h2>Waiters List
+                <h2>Users List
                     <small>Welcome to Sahani</small>
                 </h2>
             </div>
@@ -42,8 +42,8 @@
                 </button>
                 <ul class="breadcrumb float-md-right">
                     <li class="breadcrumb-item"><a href="/><i class=" zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a href="/restaurant/users">Waiters</a></li>
-                    <li class="breadcrumb-item active">Waiter List</li>
+                    <li class="breadcrumb-item"><a href="/restaurant/users">Users</a></li>
+                    <li class="breadcrumb-item active">User List</li>
                 </ul>
             </div>
         </div>
@@ -85,7 +85,7 @@
 
                                 @endforeach
                                 @else
-                                <h1>No waiters Added</h1>
+                                <h1>No users Added</h1>
                                 @endif
 
 
@@ -123,7 +123,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="menuAddModalLabel">add a waiter </h4>
+                <h4 class="title" id="menuAddModalLabel">add a user </h4>
             </div>
             <div class="modal-body">
 
@@ -165,6 +165,21 @@
                                 <div class="element">
                                     <input type="text" name="phone" class="form-control text" placeholder="PHONE" required />
                                     @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <!-- End Element -->
+                            </div>
+                            <div class="col-md-8">
+                                <!-- Element -->
+                                <div class="element">
+                                    <select name="role" >
+                                        <option value="4">Waiter</option>
+                                        <option value="6">Cashier</option>
+                                    </select>
+                                    @error('role')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

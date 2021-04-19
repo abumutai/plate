@@ -25,6 +25,7 @@ class CreateConsumedstocksTable extends Migration
             $table->string('purpose');
             $table->string('status')->default('pending');
             $table->integer('price');
+            $table->integer('expected')->nullable();
             $table->timestamps();
         });
     }

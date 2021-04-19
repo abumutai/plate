@@ -73,7 +73,6 @@
 
                                 <tr>
                                     <td>
-                                        {{dd($orders)}}
                                         <h5>{{$order->menu->title}}</h5>
                                     </td>
                                     <td><span class="text-muted">{{$order->restaurant_profile->title}}</span></td>
