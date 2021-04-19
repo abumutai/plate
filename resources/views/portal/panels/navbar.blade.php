@@ -15,7 +15,7 @@
             </div>
         </li>
          <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
-         <sup style="color:red; font-weight:300px;">{{$user->unreadnotifications->count()}}</sup><span class="heartbit"></span><span class="point"></span>
+         <sup style="color:red; font-weight:300px;">{{$user->orders->where('status', 1)->count()}}</sup><span class="heartbit"></span><span class="point"></span>
             </a>
             <ul class="dropdown-menu pullDown">
                 <li class="body">
@@ -26,7 +26,44 @@
                                      <div class="media-body" style="width: 400px">
                                          
 
+                                         <table class="table table-hover m-b-0" style="font-size: 10px;">
+                            <thead>
+                                <tr class="theme">
+                                    
+                                    <th>Order Name</th>
+                                    <th data-breakpoints="xs md">Category</th>
+                                    <th data-breakpoints="sm xs">Customer</th>
+                                    <th data-breakpoints="xs">Amount</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @if(null !==($user))
+                                @foreach($user->orders as $order)
+                                @if($order->status == 1 )
+
+                                    <tr>
+                                    
                                         
+                                        <td>
+                                        {{$order->menu->title}}
+                                        </td>
+                                        <td>{{$order->menu->category->title}}</td>
+                                        <td><span class="text-muted">{{$order->user->name}}</span></td>
+                                        <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
+                                        
+
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <h1>No Orders made</h1>
+                                    @endif
+                            </tbody>
+                        </table>
 
 
 
@@ -38,7 +75,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="footer" align="center"> <a href="javascript:void(0);">View All</a> </li>
+                <li class="footer" align="center"> <a href="orders">View All</a> </li>
             </ul>
         </li>
 

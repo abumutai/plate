@@ -10,7 +10,7 @@
     <style>
         .set {
             /*background-image:  url('images/backgrounds/agency-content-img02.jpg'); position: top center no-repeat;*/
-            animation: animateBg forwards 2s ease-in;
+           animation: animateBg forwards 3s ease-in;
             background-size: cover;
             background-color: #ffff3d;
             background-image: url('images/button/p1.jpeg');
@@ -127,9 +127,9 @@
 @section('content')
     <!-- SubHeader =============================================== -->
     <section class="header-video set">
+        <br><br><br><br><br><br><br><br><br><br><br>
         <div id="hero_video">
-                <br><br><br><br><br><br><br><br><br><br><br>
-                <form  method="get" action="{{route('item.search')}}" style="position: relative">
+                <form  method="get" action="{{route('item.search')}}" class="hidden-xs" style="position: inherit; justify-content:center; align-self: center; align-content: center;">
                     <div id="custom-search-input">
                         <h2 class="text" style="color:indigo;">Search Foods and Drinks</h2>
                         <div class="input-group">

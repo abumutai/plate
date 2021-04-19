@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\TempOrder;
 use App\Order;
 use App\OrderDetail;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -50,6 +51,21 @@ class OrderController extends Controller
 
         return json_encode(array('message' => 'Item ' . $temp_order->menu->title . ' added to cart, successfully.'));
     }
+
+    public function createPDF() {
+        // retreive all records from db
+        $user=auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+  
+        // share data to view
+        view()->share('portal.today_order_report', compact($user, $restaurant, $orders));
+        $pdf = PDF::loadView('portal.today_order_report', compact($user, $restaurant, $orders));
+  
+        // download PDF file with download method
+        return $pdf->download('today_report.pdf');
+      }
+
     public function pending($order_id)
     {
         try {
@@ -61,6 +77,8 @@ class OrderController extends Controller
             return redirect('/dashboard')->with('error', 'An error occured while activating restaurant ');
         }
     }
+  
+
     public function processing($order_id)
     {
         try {
@@ -95,6 +113,10 @@ class OrderController extends Controller
             return redirect('/dashboard')->with('error', 'An error occured while activating restaurant ');
         }
     }
+    
+   
+    
+   
     public function cartComplete(RestaurantProfile $restaurant)
     {
         $data = request()->validate([

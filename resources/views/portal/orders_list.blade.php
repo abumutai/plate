@@ -1,4 +1,4 @@
-@extends('portal.layouts.contentLayoutMaster2')
+@extends('portal.layouts.restaurant_config')
 
 @section('title', 'Orders List')
 
@@ -53,6 +53,9 @@
             <div class="col-lg-12">
                 <div class="card product_item_list">
                     <div class="body table-responsive">
+                        <div class="d-flex justify-content-between mb-4">
+                            <a class="btn btn-primary" href="{{ URL::to('/portal/orders/pdf') }}">Export to PDF</a>
+                        </div>
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
@@ -65,8 +68,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
+                                @php
+                                $user=auth()->user();
+                                $restaurant=$user->restaurant_profile;
+                                $orders=$user->restaurant_profile->orders;
+                                @endphp
                                 @if(null !==($restaurant))
                                 @foreach($restaurant->orders as $order)
                                 @if($order->status == 1 or $order->status == 2 )

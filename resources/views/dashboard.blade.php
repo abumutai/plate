@@ -300,9 +300,9 @@
         @endforeach
               </ul>
             </div>
-            <div class="card-footer text-center"style="color:white;background-color: indigo">
-              <a href="{{route('stock.available')}}" class="uppercase" style="color: white" >View All</a>
-           </div>
+            <!-- /.card-footer --><div class="card-footer text-center"style="color:white;background-color: indigo">
+            <a href="{{route('stock.available')}}" class="uppercase" style="color: white" >View All</a>
+          </div>
           </div>
       </div>
       {{-- <div class="content">
@@ -332,7 +332,7 @@
             </div>
           </div>
         </div>
-      </div> --}}
+      </div>  --}}
     </div>
   </section>
 @endsection

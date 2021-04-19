@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\RestaurantProfile;
 use App\User;
+use App\Order;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -77,9 +78,65 @@ class RestaurantController extends Controller
     public function waiterDashboard()
     {
         $user = auth()->user();
-     
+        
         return view('portal.waiterdashboard', compact('user'));
+        
+    }
+    
+    public function cashierDashboard()
+    {
+        $user = auth()->user();
+        $restaurant=$user->restaurant_profile;
+        $orders=$user->restaurant_profile->orders;
+     
+        return view('portal.cashierdashboard', compact('user', 'restaurant', 'orders'));
    
+    }
+
+    public function cash($order_id){
+    
+        try {
+    
+            Order::where(['id' => $order_id])->update(['payment_option' => 1]);
+            $payment_id = 1;
+            $user=auth()->user();
+            $restaurant=$user->restaurant_profile;
+            $orders=$user->restaurant_profile->orders;
+            $orderid = Order::where(['id' => $order_id]);
+            return view('portal.receipt',compact('user','restaurant', 'orders', 'orderid', 'order_id', 'payment_id'));
+        } catch (\Exception $e) {
+            return redirect('/dashboard')->with('error', 'An error occured while activating restaurant ');
+        }
+    }
+
+    public function mpesa($order_id){
+        try {
+ 
+            Order::where(['id' => $order_id])->update(['payment_option' => 2]);
+            
+            $payment_id = 2;
+            $user=auth()->user();
+            $restaurant=$user->restaurant_profile;
+            $orders=$user->restaurant_profile->orders;
+            $orderid = Order::where(['id' => $order_id]);
+            return view('portal.receipt',compact('user','restaurant', 'orders', 'orderid', 'order_id','payment_id'));
+        }catch (\Exception $e){
+            return redirect('/portal/receipt')->with('error', 'Order has been completed');
+        }
+    }
+
+    
+    public function complete($user_id){
+        try {
+
+            //Order::where(['user_id' => $user_id])->update(['payment_option' => 1]);
+            $user=auth()->user();
+            $restaurant=$user->restaurant_profile;
+            $orders=$user->restaurant_profile->orders;
+            return view('portal.receipt_view',compact('user','restaurant', 'orders', 'user_id'));
+        } catch (\Exception $e) {
+            return redirect('/cashier/dashboard')->with('error', 'An error occured while activating restaurant ');
+        }
     }
     
     public function addWaiter(Request $request)

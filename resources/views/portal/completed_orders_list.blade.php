@@ -1,3 +1,9 @@
+<?php
+ use App\Menu;
+ $ct = Menu::sum('pricing');
+ //dd($ct);
+?>
+
 @extends('portal.layouts.contentLayoutMaster2')
 
 @section('title', 'Orders List')
@@ -36,6 +42,7 @@
                     <small>Welcome to Sahani</small>
                 </h2>
             </div>
+            
             <div class="col-lg-5 col-md-6 col-sm-12">
                 <!-- <button data-toggle="modal" data-target="#menuAddModal" class="btn btn-white btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
                     <i class="zmdi zmdi-plus"></i>
@@ -51,6 +58,9 @@
     <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-lg-12">
+                <div class="d-flex justify-content-end mb-4">
+                    <a class="btn btn-primary" href="{{ URL::to('#') }}">Export to PDF</a>
+                </div>
                 <div class="card product_item_list">
                     <div class="body table-responsive">
                         <table class="table table-hover m-b-0">
@@ -62,16 +72,18 @@
                                     <th data-breakpoints="sm xs">Customer</th>
                                     <th data-breakpoints="xs">Amount</th>
                                     <th data-breakpoints="xs md">Status</th>
-                                    <th data-breakpoints="sm xs md">Action</th>
+                                    <th data-breakpoints="sm xs md">Order Date</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                     @php
 
-
+                                    $total = array();
+                                    @endphp    
                                 @if(null !==($restaurant))
                                 @foreach($restaurant->orders as $order)
-
-                                @if($order->status == 3 or $order->status == 4 )
+                                   
+                                @if($order->status == 3)
 
 
                                 <tr>
@@ -82,6 +94,7 @@
                                         <h5>{{$order->menu->title}}</h5>
                                     </td>
                                     <td>{{$order->menu->category->title}}</td>
+                                    <td>{{$order->user->name}}</td>
                                     <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
                                     @if($order->status == 3)
                                     <td><span class="btn btn-success">Completed </span></td>
@@ -89,24 +102,7 @@
 
                                     <td><span class="btn btn-danger">Cancelled </span></td>
                                     @endif
-                                    <td>
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button" aria-expanded="false">Actions <span class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu">
-
-                                                <li><a href="{{ action('OrderController@pending', $order->id) }}">Pending</a>
-                                                </li>
-
-                                                <li><a href="{{ action('OrderController@processing', $order->id) }}">Processing</a>
-                                                </li>
-                                                <li><a href="{{ action('OrderController@completed', $order->id) }}">Completed</a>
-                                                </li>
-                                                <li><a href="{{ action('OrderController@cancelled', $order->id) }}">Cancelled</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </td>
+                                    <td> {{date_format(date_create($order->created_at), 'F jS, Y')}}</td>
 
                                 </tr>
                                 @endif
@@ -119,6 +115,26 @@
 
                             </tbody>
                         </table>
+                            <tfoot>
+                       
+                            <div class="d-flex justify-content-end mb-4">
+                                <a class="btn btn-info" href="{{ URL::to('#') }}"> Total Amount Ksh  
+                                    @php
+                             
+                                    foreach($restaurant->orders as $order){
+                                        if($order->status == 3){
+                                         $total[] = $order->menu->pricing;
+
+                                        }
+
+                                    }
+                                    print_r (array_sum($total)) ;
+                                   
+                                    
+                                    @endphp
+                                </a>
+                            </div>
+                            </tfoot>
                     </div>
                 </div>
             </div>

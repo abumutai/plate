@@ -1,4 +1,4 @@
-@extends('portal.layouts.contentLayoutMaster2')
+@extends('portal.layouts.contentLayoutMasterReport')
 
 @section('title', 'Orders List')
 
@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="{{asset('port/assets/plugins/nouislider/nouislider.min.css')}}" />
 <link rel="stylesheet" href="{{asset('port/assets/plugins/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('port/assets/plugins/sweetalert/sweetalert.css')}}" />
+
 <style>
     .ms-container .ms-selectable,
     .ms-container .ms-selection {
@@ -31,21 +32,66 @@
 <section class="content ecommerce-page">
     <div class="block-header">
         <div class="row">
-            <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Order List
-                    <small>Welcome to Sahani</small>
-                </h2>
-            </div>
+            
             <div class="col-lg-5 col-md-6 col-sm-12">
-                <!-- <button data-toggle="modal" data-target="#menuAddModal"
-                            class="btn btn-white btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
-                        <i class="zmdi zmdi-plus"></i>
-                    </button> -->
-                <!-- <ul class="breadcrumb float-md-right">
-                        <li class="breadcrumb-item"><a href="index-2.html"><i class="zmdi zmdi-home"></i> Oreo</a></li>
-                        <li class="breadcrumb-item"><a href="ec-dashboard.html">eCommerce</a></li>
-                        <li class="breadcrumb-item active">Product List</li>
-                    </ul> -->
+
+
+    <?php
+    $orders_count=0;
+    $total_sales=0;
+    $total_profit=0;
+    $weeklysum = 0;
+    use Carbon\Carbon;
+    use App\Order;
+
+    //ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+    
+    $user=auth()->user();
+    $restaurant=$user->restaurant_profile;
+    $orders=$user->restaurant_profile->orders;
+    
+    
+    $timezone = Carbon::now()->setTimezone('Africa/Nairobi');
+    $today = Carbon::now()->startOfDay();
+    $week = Carbon::now()->startOfWeek();
+    
+    $weekStartDate = $today->startOfWeek()->format('Y-m-d H:i');
+    $weekEndDate = $today->endOfWeek()->format('Y-m-d H:i');
+    $monthStartDate = $today->startOfMonth()->format('Y-m-d H:i');
+    $monthEndDate = $today->endOfMonth()->format('Y-m-d H:i');
+    $yearStartDate = $today->startOfYear()->format('Y-m-d H:i');
+    $yearEndDate = $today->endOfYear()->format('Y-m-d H:i');
+    
+    
+    //Getting subsequent days
+    $one = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(1))->count();
+    $two = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(2))->count();
+    $three = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(3))->count();
+    $four = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(4))->count();
+    $five = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(5))->count();
+    $six = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(6))->count();
+    $seven = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today()->subDay(7))->count();
+
+    $orders_count = Order::where('restaurant_profile_id', $restaurant->id)->count();
+
+    $sales = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today())->count();
+    $t_sales = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today())->get();
+    //dd($t_sales);
+    $week_sale = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereBetween('created_at', [$weekStartDate, $today])->count();
+    $t_week_sale = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereBetween('created_at', [$weekStartDate, $today])->get();
+    $month_sale = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereBetween('created_at', [$monthStartDate, $today])->count();
+    $year_sale = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereBetween('created_at', [$yearStartDate, $today])->count();
+
+    $pending_orders = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->where('Status',1)->count();
+    $processing_orders = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->where('Status',2)->count();
+    $completed_orders = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->where('Status',3)->count();
+    $cancelled_orders = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->where('Status',4)->count();
+   //dd($year_sale);
+    //$completed_orders = Order::where('status', 1)->count();
+    $t_amt = Order::with('menu')->where('restaurant_profile_id', $restaurant->id)->whereDate('created_at', Carbon::today());
+    
+   
+    ?>
             </div>
         </div>
     </div>
@@ -54,58 +100,231 @@
             <div class="col-lg-12">
                 <div class="card product_item_list">
                     <div class="body table-responsive">
-                        <table class="table table-hover m-b-0">
+                    <div class="d-flex justify-content-end mb-4">
+                        <a class="btn btn-primary" href="{{ URL::to('/portal/orders/pdf') }}">Export to PDF</a>
+                    </div>
+                    <div class="d-flex justify-content-start mb-4">
+                        <h4><a  href="{{ URL::to('/portal/dashboard') }}">Total of {{ $sales}} Orders</a></h4>
+                    </div>
+                    <div class="d-flex justify-content-start mb-4">
+                        <h2>Pending Orders</h2>
+                    </div>
+                    <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Item Title</th>
-                                    <th data-breakpoints="sm xs">Restaurant</th>
+                                    <th>Order Name</th>
                                     <th data-breakpoints="xs md">Category</th>
+                                    <th data-breakpoints="sm xs">Customer</th>
                                     <th data-breakpoints="xs">Amount</th>
-                                    <th data-breakpoints="xs">Order Date</th>
                                     <th data-breakpoints="xs md">Status</th>
-                                    <th data-breakpoints="sm xs md">Action</th> 
+                                    
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $user=auth()->user();
+                                $restaurant=$user->restaurant_profile;
+                                $orders=$user->restaurant_profile->orders;
+                                @endphp
 
-                                @foreach($orders as $order)
-                                @if($order->status == 1 or $order->status == 2)
+                                @if(null !==($restaurant))
+                                @foreach($t_sales as $order)
+                                @if($order->status == 1)
 
-                                <tr>
-                                    <td>
+                                    <tr>
+                                        <td>
+                                            <h5>{{$order->menu->title}}</h5>
+                                        </td>
+                                        <td>{{$order->menu->category->title}}</td>
+                                        <td><span class="text-muted">{{$order->user->name}}</span></td>
+                                        <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
+                                        @if($order->status ==1)
+                                        <td><span class="btn btn-warning">Pending </span></td>
+                                        @elseif($order->status == 2)
+                                        <td><span class="btn btn-primary">Processing </span></td>
+                                        @endif
+                                       
+                                       
                                         
-                                        <h5>{{$order->menu->title}}</h5>
-                                    </td>
-                                    <td><span class="text-muted">{{$order->restaurant_profile->title}}</span></td>
-                                    <td>{{$order->menu->category->title}}</td>
-                                    <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
-                                    <td> {{date_format(date_create($order->created_at), 'F jS, Y')}}</td>
-                                   
-                                    @if($order->status == 1)
-                                    <td><span class="btn btn-warning">Pending </span></td>
-                                    @elseif($order->status == 2)
-                                    <td><span class="btn btn-primary">Processing </span></td>
 
-                                    @endif
-
-                                    <td>
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button" aria-expanded="false">Actions <span class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu">
-
-
-                                                <li><a href="{{ action('OrderController@cancelled', $order->id) }}">Cancel</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </td>
+                                    </tr>
                                     @endif
                                     @endforeach
+                                    @else
+                                    <h1>No Orders made</h1>
+                                    @endif
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+                <div class="card product_item_list">
+                    <div class="body table-responsive">
+                   
+                    <div class="d-flex justify-content-start mb-4">
+                        <h2>Processing Orders</h2>
+                    </div>
+                    <table class="table table-hover m-b-0">
+                            <thead>
+                                <tr>
+                                    <th>Order Name</th>
+                                    <th data-breakpoints="xs md">Category</th>
+                                    <th data-breakpoints="sm xs">Customer</th>
+                                    <th data-breakpoints="xs">Amount</th>
+                                    <th data-breakpoints="xs md">Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                $user=auth()->user();
+                                $restaurant=$user->restaurant_profile;
+                                $orders=$user->restaurant_profile->orders;
+                                @endphp
+
+                                @if(null !==($restaurant))
+                                @foreach($t_sales as $order)
+                                @if($order->status == 2 )
+
+                                    <tr>
+                                        <td>
+                                            <h5>{{$order->menu->title}}</h5>
+                                        </td>
+                                        <td>{{$order->menu->category->title}}</td>
+                                        <td><span class="text-muted">{{$order->user->name}}</span></td>
+                                        <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
+                                        @if($order->status ==1)
+                                        <td><span class="btn btn-warning">Pending </span></td>
+                                        @elseif($order->status == 2)
+                                        <td><span class="btn btn-primary">Processing </span></td>
+                                        @endif
+                                       
+                                       
+                                       
+
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <h1>No Orders made</h1>
+                                    @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card product_item_list">
+                    <div class="body table-responsive">
+                    
+                    <div class="d-flex justify-content-start mb-4">
+                        <h2>Completed Orders</h2>
+                    </div>
+                    <table class="table table-hover m-b-0">
+                            <thead>
+                                <tr>
+                                    <th>Order Name</th>
+                                    <th data-breakpoints="xs md">Category</th>
+                                    <th data-breakpoints="sm xs">Customer</th>
+                                    <th data-breakpoints="xs">Amount</th>
+                                    <th data-breakpoints="xs md">Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                $user=auth()->user();
+                                $restaurant=$user->restaurant_profile;
+                                $orders=$user->restaurant_profile->orders;
+                                @endphp
+
+                                @if(null !==($restaurant))
+                                @foreach($t_sales as $order)
+                                @if($order->status == 3)
+
+                                    <tr>
+                                        <td>
+                                            <h5>{{$order->menu->title}}</h5>
+                                        </td>
+                                        <td>{{$order->menu->category->title}}</td>
+                                        <td><span class="text-muted">{{$order->user->name}}</span></td>
+                                        <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
+                                        @if($order->status ==3)
+                                        <td><span class="btn btn-info">Completed </span></td>
+                                        @elseif($order->status == 4)
+                                        <td><span class="btn btn-danger">Cancelled </span></td>
+                                        @endif
+                                       
+                                       
+                                        
+
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <h1>No Orders made</h1>
+                                    @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card product_item_list">
+                    <div class="body table-responsive">
+                    
+                    <div class="d-flex justify-content-start mb-4">
+                        <h2>Cancelled Orders</h2>
+                    </div>
+                    <table class="table table-hover m-b-0">
+                            <thead>
+                                <tr>
+                                    <th>Order Name</th>
+                                    <th data-breakpoints="xs md">Category</th>
+                                    <th data-breakpoints="sm xs">Customer</th>
+                                    <th data-breakpoints="xs">Amount</th>
+                                    <th data-breakpoints="xs md">Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                $user=auth()->user();
+                                $restaurant=$user->restaurant_profile;
+                                $orders=$user->restaurant_profile->orders;
+                                @endphp
+
+                                @if(null !==($restaurant))
+                                @foreach($t_sales as $order)
+                                @if($order->status == 4)
+
+                                    <tr>
+                                        <td>
+                                            <h5>{{$order->menu->title}}</h5>
+                                        </td>
+                                        <td>{{$order->menu->category->title}}</td>
+                                        <td><span class="text-muted">{{$order->user->name}}</span></td>
+                                        <td>{{$order->menu->currency}} {{$order->menu->pricing}}</td>
+                                        @if($order->status ==3)
+                                        <td><span class="btn btn-info">Pending </span></td>
+                                        @elseif($order->status == 4)
+                                        <td><span class="btn btn-danger">Cancelled </span></td>
+                                        @endif
+                                       
+                                       
+                                        
+
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <h1>No Orders made</h1>
+                                    @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="body">
                         <ul class="pagination pagination-primary m-b-0">
@@ -309,7 +528,7 @@
 
 <script src="{{asset('port/assets/js/pages/ui/notifications.js')}}"></script> <!-- Custom Js -->
 <script src="{{asset('port/assets/plugins/sweetalert/sweetalert.min.js')}}"></script> <!-- SweetAlert Plugin Js -->
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     let inputImage = document.querySelector('input[name=image]');
 
